@@ -2,3 +2,332 @@
 2021-02-06 13:09:17.412 +07:00 [INF] Starting web host
 2021-02-06 13:11:13.294 +07:00 [INF] GetProducts Success
 2021-02-06 14:11:20.765 +07:00 [INF] Starting web host
+2021-02-06 14:24:03.324 +07:00 [INF] Starting web host
+2021-02-06 14:25:02.985 +07:00 [INF] GetProducts Success
+2021-02-06 14:25:17.750 +07:00 [INF] Get ProductGroups Success
+2021-02-06 14:25:23.280 +07:00 [INF] Get ProductGroups Success
+2021-02-06 14:25:47.658 +07:00 [INF] Add ProductGroup Success
+2021-02-06 14:26:02.153 +07:00 [INF] Add ProductGroup Success
+2021-02-06 14:26:34.340 +07:00 [INF] Add Product Success
+2021-02-06 14:26:52.265 +07:00 [INF] Add Product Success
+2021-02-06 14:26:56.228 +07:00 [INF] GetProducts Success
+2021-02-06 15:35:45.186 +07:00 [INF] Starting web host
+2021-02-06 15:37:01.050 +07:00 [INF] Starting web host
+2021-02-06 15:37:45.788 +07:00 [INF] GetProducts Success
+2021-02-06 15:38:16.444 +07:00 [INF] Get ProductGroups Success
+2021-02-06 15:38:26.807 +07:00 [INF] Add ProductGroup Success
+2021-02-06 15:38:45.910 +07:00 [INF] Add ProductGroup Success
+2021-02-06 15:39:05.072 +07:00 [INF] Add ProductGroup Success
+2021-02-06 15:39:16.518 +07:00 [INF] Add ProductGroup Success
+2021-02-06 15:39:28.988 +07:00 [INF] Add Product Success
+2021-02-06 15:39:53.481 +07:00 [INF] Get ProductGroups Success
+2021-02-06 15:39:59.878 +07:00 [INF] Add Product Success
+2021-02-06 15:40:25.341 +07:00 [INF] GetProducts Success
+2021-02-06 15:41:51.688 +07:00 [INF] Starting web host
+2021-02-06 15:42:16.004 +07:00 [INF] Starting web host
+2021-02-06 15:42:23.222 +07:00 [INF] GetProducts Success
+2021-02-06 15:42:59.956 +07:00 [ERR] Lambda expression used inside Include is not valid.
+2021-02-06 15:43:34.884 +07:00 [INF] Starting web host
+2021-02-06 15:45:11.687 +07:00 [ERR] Lambda expression used inside Include is not valid.
+2021-02-06 15:58:31.297 +07:00 [INF] Starting web host
+2021-02-06 15:58:47.577 +07:00 [INF] GetProducts Success
+2021-02-06 15:59:55.468 +07:00 [ERR] Lambda expression used inside Include is not valid.
+2021-02-06 16:00:22.890 +07:00 [INF] Starting web host
+2021-02-06 16:21:49.402 +07:00 [INF] Starting web host
+2021-02-06 16:23:00.270 +07:00 [ERR] Error mapping types.
+
+Mapping types:
+Object -> List`1
+System.Object -> System.Collections.Generic.List`1[[NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrdersDto, NetCoreAPI_Template_v3_with_auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-02-06 16:24:17.004 +07:00 [INF] Starting web host
+2021-02-06 16:31:39.143 +07:00 [INF] Starting web host
+2021-02-06 16:33:54.826 +07:00 [ERR] Error mapping types.
+
+Mapping types:
+Object -> List`1
+System.Object -> System.Collections.Generic.List`1[[NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrdersDto, NetCoreAPI_Template_v3_with_auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-02-06 16:50:08.646 +07:00 [INF] Starting web host
+2021-02-06 16:50:53.854 +07:00 [ERR] Error mapping types.
+
+Mapping types:
+Object -> List`1
+System.Object -> System.Collections.Generic.List`1[[NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrdersDto, NetCoreAPI_Template_v3_with_auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-02-06 18:16:07.083 +07:00 [INF] Starting web host
+2021-02-06 18:16:19.857 +07:00 [INF] GetProducts Success
+2021-02-06 18:16:26.922 +07:00 [INF] Get ProductGroups Success
+2021-02-06 18:16:38.237 +07:00 [INF] Add ProductGroup Success
+2021-02-06 18:16:51.031 +07:00 [INF] Add ProductGroup Success
+2021-02-06 18:17:00.496 +07:00 [INF] Add ProductGroup Success
+2021-02-06 18:17:10.080 +07:00 [INF] Add ProductGroup Success
+2021-02-06 18:17:33.819 +07:00 [INF] Get ProductGroups Success
+2021-02-06 18:17:40.688 +07:00 [INF] Add Product Success
+2021-02-06 18:18:10.331 +07:00 [INF] Add Product Success
+2021-02-06 18:18:25.746 +07:00 [INF] Add Product Success
+2021-02-06 18:18:31.148 +07:00 [INF] GetProducts Success
+2021-02-06 18:19:47.774 +07:00 [INF] Add Product Success
+2021-02-06 18:23:21.872 +07:00 [INF] Add Product Success
+2021-02-06 18:23:57.561 +07:00 [INF] Add Product Success
+2021-02-06 18:38:28.924 +07:00 [INF] Starting web host
+2021-02-06 18:39:38.510 +07:00 [INF] Add ProductGroup Success
+2021-02-06 18:39:50.811 +07:00 [INF] Add ProductGroup Success
+2021-02-06 18:40:02.712 +07:00 [INF] Add ProductGroup Success
+2021-02-06 18:40:10.221 +07:00 [INF] Add ProductGroup Success
+2021-02-06 18:40:28.970 +07:00 [INF] Add Product Success
+2021-02-06 18:41:01.158 +07:00 [INF] Add Product Success
+2021-02-06 18:41:16.130 +07:00 [INF] Add Product Success
+2021-02-06 18:41:20.893 +07:00 [INF] GetProducts Success
+2021-02-06 18:43:01.710 +07:00 [ERR] Failed executing DbCommand (8ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Double), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Double), @p7='?' (DbType = Double), @p8='?' (DbType = Double)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Order] ([CreatedBy], [CreatedDate], [Discount], [ItemCount], [OrderNoId], [ProductId], [ProductPrice], [Total], [TotalAmount])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+SELECT [Id]
+FROM [Order]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+2021-02-06 18:43:02.074 +07:00 [ERR] An exception occurred in the database while saving changes for context type 'NetCoreAPI_Template_v3_with_auth.Data.AppDBContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Order_OrderNo_OrderNoId". The conflict occurred in database "SmileShop", table "dbo.OrderNo", column 'Id'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:79d86292-44aa-42af-8987-d55c6d769469
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Order_OrderNo_OrderNoId". The conflict occurred in database "SmileShop", table "dbo.OrderNo", column 'Id'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:79d86292-44aa-42af-8987-d55c6d769469
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at NetCoreAPI_Template_v3_with_auth.Services.SmileShop.SmileShopService.AddOrder(List`1 newOrder) in D:\Template\BackEnd\NetCoreAPI_Template_v3_with_auth-master\NetCoreAPI_Template_v3_with_auth\Services\SmileShop\SmileShopService.cs:line 278
+   at NetCoreAPI_Template_v3_with_auth.Controllers.SmileShopController.AddOrder(List`1 newOrder) in D:\Template\BackEnd\NetCoreAPI_Template_v3_with_auth-master\NetCoreAPI_Template_v3_with_auth\Controllers\SmileShopController.cs:line 67
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+2021-02-06 18:43:02.111 +07:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Order_OrderNo_OrderNoId". The conflict occurred in database "SmileShop", table "dbo.OrderNo", column 'Id'.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:79d86292-44aa-42af-8987-d55c6d769469
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at NetCoreAPI_Template_v3_with_auth.Services.SmileShop.SmileShopService.AddOrder(List`1 newOrder) in D:\Template\BackEnd\NetCoreAPI_Template_v3_with_auth-master\NetCoreAPI_Template_v3_with_auth\Services\SmileShop\SmileShopService.cs:line 278
+   at NetCoreAPI_Template_v3_with_auth.Controllers.SmileShopController.AddOrder(List`1 newOrder) in D:\Template\BackEnd\NetCoreAPI_Template_v3_with_auth-master\NetCoreAPI_Template_v3_with_auth\Controllers\SmileShopController.cs:line 67
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.ResponseCaching.ResponseCachingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-02-06 18:47:44.266 +07:00 [INF] Starting web host
+2021-02-06 18:48:07.352 +07:00 [INF] GetProducts Success
+2021-02-06 18:49:10.614 +07:00 [INF] Add Order Success
+2021-02-06 18:50:02.360 +07:00 [INF] Add Order Success
+2021-02-06 18:54:46.275 +07:00 [INF] Starting web host
+2021-02-06 18:55:02.458 +07:00 [INF] Starting web host
+2021-02-06 18:55:10.982 +07:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> List`1
+System.Object -> System.Collections.Generic.List`1[[NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrdersDto, NetCoreAPI_Template_v3_with_auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-02-06 18:56:15.631 +07:00 [INF] Starting web host
+2021-02-06 18:56:22.325 +07:00 [ERR] Lambda expression used inside Include is not valid.
+2021-02-06 18:57:55.254 +07:00 [INF] Starting web host
+2021-02-06 18:58:34.935 +07:00 [ERR] Lambda expression used inside Include is not valid.
+2021-02-06 19:00:22.088 +07:00 [INF] Starting web host
+2021-02-06 19:01:09.256 +07:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> List`1
+System.Object -> System.Collections.Generic.List`1[[NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrdersDto, NetCoreAPI_Template_v3_with_auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-02-06 19:05:37.206 +07:00 [INF] Starting web host
+2021-02-06 19:06:24.082 +07:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> List`1
+System.Object -> System.Collections.Generic.List`1[[NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrdersDto, NetCoreAPI_Template_v3_with_auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-02-06 19:09:26.437 +07:00 [INF] Starting web host
+2021-02-06 19:10:32.114 +07:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> List`1
+System.Object -> System.Collections.Generic.List`1[[NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrdersDto, NetCoreAPI_Template_v3_with_auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-02-06 19:12:13.807 +07:00 [INF] Starting web host
+2021-02-06 19:20:01.438 +07:00 [INF] Starting web host
+2021-02-06 19:20:55.649 +07:00 [ERR] Error mapping types.
+
+Mapping types:
+Object -> List`1
+System.Object -> System.Collections.Generic.List`1[[NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrdersDto, NetCoreAPI_Template_v3_with_auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-02-06 19:22:20.429 +07:00 [INF] Starting web host
+2021-02-06 19:24:31.107 +07:00 [INF] Starting web host
+2021-02-06 19:25:11.378 +07:00 [ERR] Error mapping types.
+
+Mapping types:
+Object -> List`1
+System.Object -> System.Collections.Generic.List`1[[NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrdersDto, NetCoreAPI_Template_v3_with_auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-02-06 19:37:00.891 +07:00 [INF] Starting web host
+2021-02-06 19:42:52.317 +07:00 [INF] Starting web host
+2021-02-06 19:48:15.930 +07:00 [INF] Starting web host
+2021-02-06 19:50:32.387 +07:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> List`1
+System.Object -> System.Collections.Generic.List`1[[NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrdersDto, NetCoreAPI_Template_v3_with_auth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-02-06 20:19:43.928 +07:00 [INF] Starting web host
+2021-02-06 20:21:35.155 +07:00 [INF] Starting web host
+2021-02-06 20:26:15.700 +07:00 [INF] Starting web host
+2021-02-06 20:30:00.165 +07:00 [INF] Starting web host
+2021-02-06 20:31:59.245 +07:00 [INF] Starting web host
+2021-02-06 20:34:02.728 +07:00 [INF] Starting web host
+2021-02-06 20:37:19.049 +07:00 [INF] Starting web host
+2021-02-06 20:38:05.290 +07:00 [INF] GetProducts Success
+2021-02-06 20:38:14.123 +07:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> GetOrderDto
+System.Object -> NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrderDto
+2021-02-06 20:38:44.272 +07:00 [INF] Starting web host
+2021-02-06 20:39:12.468 +07:00 [INF] GetProducts Success
+2021-02-06 20:39:15.818 +07:00 [INF] GetProducts Success
+2021-02-06 20:39:49.918 +07:00 [INF] GetProducts Success
+2021-02-06 20:40:08.787 +07:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> GetOrderDto
+System.Object -> NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrderDto
+2021-02-06 20:46:12.343 +07:00 [INF] Starting web host
+2021-02-06 20:46:45.236 +07:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> GetOrderDto
+System.Object -> NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrderDto
+2021-02-06 20:52:32.868 +07:00 [INF] Starting web host
+2021-02-06 20:52:53.415 +07:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> GetOrderDto
+System.Object -> NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrderDto
+2021-02-06 20:55:50.666 +07:00 [INF] Starting web host
+2021-02-06 20:56:27.944 +07:00 [INF] GetProducts Success
+2021-02-06 20:56:35.259 +07:00 [ERR] Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> GetOrderNoDto
+System.Object -> NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop.GetOrderNoDto
+2021-02-06 20:58:45.443 +07:00 [INF] Starting web host
+2021-02-06 20:59:22.002 +07:00 [ERR] Failed executing DbCommand (48ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [OrderNo] ([CreatedDate], [OrderNosId])
+VALUES (@p0, @p1);
+SELECT [Id]
+FROM [OrderNo]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+2021-02-06 20:59:22.051 +07:00 [ERR] An exception occurred in the database while saving changes for context type 'NetCoreAPI_Template_v3_with_auth.Data.AppDBContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'OrderNosId'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:b83728d3-4ca1-49ab-b7f4-eb123b5c18e3
+Error Number:207,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'OrderNosId'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:b83728d3-4ca1-49ab-b7f4-eb123b5c18e3
+Error Number:207,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at NetCoreAPI_Template_v3_with_auth.Services.SmileShop.SmileShopService.AddOrder(List`1 newOrder) in D:\Template\BackEnd\NetCoreAPI_Template_v3_with_auth-master\NetCoreAPI_Template_v3_with_auth\Services\SmileShop\SmileShopService.cs:line 262
+2021-02-06 20:59:22.076 +07:00 [ERR] An error occurred while updating the entries. See the inner exception for details.

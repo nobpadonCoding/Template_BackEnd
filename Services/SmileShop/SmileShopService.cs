@@ -188,23 +188,23 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
             try
             {
                 //check department
-                var produck = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == editProduct.ProductId);
-                if (produck is null)
+                var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == editProduct.ProductId);
+                if (product is null)
                 {
                     return ResponseResult.Failure<GetProductDto>($"Position id {editProduct.ProductId} not found");
                 }
 
                 //assign value
-                produck.Name = editProduct.ProductName;
-                produck.Price = editProduct.ProductPrice;
-                produck.ProductGroupId = editProduct.ProductGroupId;
+                product.Name = editProduct.ProductName;
+                product.Price = editProduct.ProductPrice;
+                product.ProductGroupId = editProduct.ProductGroupId;
 
                 //update database
-                _dbContext.Products.Update(produck);
+                _dbContext.Products.Update(product);
                 await _dbContext.SaveChangesAsync();
 
                 //mapper Dto and return
-                var dto = _mapper.Map<GetProductDto>(produck);
+                var dto = _mapper.Map<GetProductDto>(product);
                 _log.LogInformation($"Edit produck Success");
                 return ResponseResult.Success(dto, "Success");
             }
@@ -241,6 +241,62 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 
                 _log.LogError(ex.Message);
                 return ResponseResult.Failure<GetProductDto>(ex.Message);
+            }
+        }
+
+        public Task<ServiceResponse<List<GetOrderDto>>> GetOrder()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ServiceResponse<GetOrderDto>> AddOrder(List<AddOrderDto> newOrder)
+        {
+            try
+            {
+                var runNo = new OrderNo
+                {
+                    CreatedDate = Now()
+                };
+
+                _dbContext.OrderNos.Add(runNo);
+                await _dbContext.SaveChangesAsync();
+
+                var order_ch = _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderNoId == runNo.Id);
+                if (order_ch is null)
+                {
+                     _log.LogError($"Order id {runNo.Id} duplicate");
+                    return ResponseResult.Failure<GetOrderDto>($"Order id {runNo.Id} duplicate");
+                }
+
+                foreach (var item in newOrder)
+                {
+                    var order_new = new Orders
+                    {
+                        OrderNoId= runNo.Id,
+                        ProductId = item.ProductId,
+                        ProductPrice = item.ProductPrice,
+                        Discount = item.ProductDiscount,
+                        CreatedBy = GetUserId(),
+                        CreatedDate = Now(),
+                        ItemCount = newOrder.Count(),
+                    };
+
+                    _dbContext.Orders.Add(order_new);
+                    await _dbContext.SaveChangesAsync();
+                }
+
+                var get_order_retuen = _dbContext.Orders.Where(x=>x.OrderNoId==runNo.Id).ToListAsync();
+                // var idorder = _dbContext.OrderNos.Where(x=>x.Id==runNo.Id).ToListAsync();
+
+                var order_retuen = _mapper.Map<GetOrderDto>(get_order_retuen);
+                _log.LogInformation($"Add Order Success");
+                return ResponseResult.Success<GetOrderDto>(null, "Success");
+            }
+            catch (Exception ex)
+            {
+
+                _log.LogError(ex.Message);
+                return ResponseResult.Failure<GetOrderDto>(ex.Message);
             }
         }
     }

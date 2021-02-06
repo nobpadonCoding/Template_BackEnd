@@ -19,15 +19,30 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.Orders", b =>
+            modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.OrderNo", b =>
                 {
-                    b.Property<int>("OrderId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedBy")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrderNo");
+                });
+
+            modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.Orders", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -36,6 +51,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                         .HasColumnType("float");
 
                     b.Property<int>("ItemCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderNoId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")
@@ -50,7 +68,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.Property<double>("TotalAmount")
                         .HasColumnType("float");
 
-                    b.HasKey("OrderId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderNoId");
 
                     b.HasIndex("ProductId");
 
@@ -122,22 +142,22 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7254bba1-a9aa-4ea1-91b0-efc9398724b1"),
+                            Id = new Guid("d87e6497-2728-4222-bfcf-00684686f1d7"),
                             Name = "user"
                         },
                         new
                         {
-                            Id = new Guid("ae4e8893-d9be-4add-992e-77810a61e224"),
+                            Id = new Guid("0db2baf5-b6f7-4367-a25b-dabf405f7514"),
                             Name = "Manager"
                         },
                         new
                         {
-                            Id = new Guid("eead8ae0-d7e4-408f-b9bf-cba8a71a0800"),
+                            Id = new Guid("6587c971-9002-4312-8c0d-3e2e9190762e"),
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("b4e30a4c-3f52-4a3f-9685-34d4d970b9f3"),
+                            Id = new Guid("3f8ec5f4-3512-4e26-8980-497efb3cd738"),
                             Name = "Developer"
                         });
                 });
@@ -183,8 +203,14 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
 
             modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.Orders", b =>
                 {
-                    b.HasOne("NetCoreAPI_Template_v3_with_auth.Models.Product", "Products")
+                    b.HasOne("NetCoreAPI_Template_v3_with_auth.Models.OrderNo", "OrderNo")
                         .WithMany()
+                        .HasForeignKey("OrderNoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NetCoreAPI_Template_v3_with_auth.Models.Product", "Product")
+                        .WithMany("Orders")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

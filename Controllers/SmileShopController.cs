@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +59,12 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
         public async Task<IActionResult> GetProductFilter([FromQuery] ProductFilterDto ProductFilter)
         {
             return Ok(await _smileService.GetProductFilter(ProductFilter));
+        }
+
+        [HttpPost("Order")]
+        public async Task<IActionResult> AddOrder(List<AddOrderDto> newOrder)
+        {
+            return Ok(await _smileService.AddOrder(newOrder));
         }
     }
 }

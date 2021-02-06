@@ -22,6 +22,8 @@ namespace NetCoreAPI_Template_v3_with_auth
             CreateMap<UserRole, UserRoleDto>();
             CreateMap<Product, GetProductDto>();
             CreateMap<ProductGroup, GetProductGroupDto>();
+            CreateMap<Orders,GetOrderDto>();
+            CreateMap<OrderNo,GetOrderNoDto>();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,5 +16,6 @@ namespace NetCoreAPI_Template_v3_with_auth.Models
         public string CreatedBy { get; set; }
         public int ProductGroupId { get; set; }
         public ProductGroup ProductGroup { get; set; }
+        public List<Orders> Orders { get; set; }
     }
 }

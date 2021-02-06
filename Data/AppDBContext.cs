@@ -39,5 +39,6 @@ namespace NetCoreAPI_Template_v3_with_auth.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductGroup> ProductGroups { get; set; }
         public DbSet<Orders> Orders { get; set; }
+        public DbSet<OrderNo> OrderNos { get; set; }
     }
 }

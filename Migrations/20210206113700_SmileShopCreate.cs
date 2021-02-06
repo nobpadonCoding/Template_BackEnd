@@ -3,12 +3,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NetCoreAPI_Template_v3_with_auth.Migrations
 {
-    public partial class smileShopCreate01 : Migration
+    public partial class SmileShopCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
                 name: "auth");
+
+            migrationBuilder.CreateTable(
+                name: "OrderNo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderNo", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "ProductGroup",
@@ -106,8 +119,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                 name: "Order",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderNoId = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
                     ProductPrice = table.Column<double>(nullable: false),
                     Discount = table.Column<double>(nullable: false),
@@ -115,11 +129,17 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     TotalAmount = table.Column<double>(nullable: false),
                     ItemCount = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<DateTime>(nullable: false)
+                    CreatedBy = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.OrderId);
+                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Order_OrderNo_OrderNoId",
+                        column: x => x.OrderNoId,
+                        principalTable: "OrderNo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Order_Product_ProductId",
                         column: x => x.ProductId,
@@ -134,11 +154,16 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("7254bba1-a9aa-4ea1-91b0-efc9398724b1"), "user" },
-                    { new Guid("ae4e8893-d9be-4add-992e-77810a61e224"), "Manager" },
-                    { new Guid("eead8ae0-d7e4-408f-b9bf-cba8a71a0800"), "Admin" },
-                    { new Guid("b4e30a4c-3f52-4a3f-9685-34d4d970b9f3"), "Developer" }
+                    { new Guid("d87e6497-2728-4222-bfcf-00684686f1d7"), "user" },
+                    { new Guid("0db2baf5-b6f7-4367-a25b-dabf405f7514"), "Manager" },
+                    { new Guid("6587c971-9002-4312-8c0d-3e2e9190762e"), "Admin" },
+                    { new Guid("3f8ec5f4-3512-4e26-8980-497efb3cd738"), "Developer" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_OrderNoId",
+                table: "Order",
+                column: "OrderNoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_ProductId",
@@ -165,6 +190,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
             migrationBuilder.DropTable(
                 name: "UserRole",
                 schema: "auth");
+
+            migrationBuilder.DropTable(
+                name: "OrderNo");
 
             migrationBuilder.DropTable(
                 name: "Product");
