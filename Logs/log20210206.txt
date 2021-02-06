@@ -1,0 +1,4 @@
+2021-02-06 12:07:08.564 +07:00 [INF] Starting web host
+2021-02-06 13:09:17.412 +07:00 [INF] Starting web host
+2021-02-06 13:11:13.294 +07:00 [INF] GetProducts Success
+2021-02-06 14:11:20.765 +07:00 [INF] Starting web host
