@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NetCoreAPI_Template_v3_with_auth.Migrations
 {
-    public partial class smileShopCreate : Migration
+    public partial class smileShopCreate01 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -102,17 +102,48 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(nullable: false),
+                    ProductPrice = table.Column<double>(nullable: false),
+                    Discount = table.Column<double>(nullable: false),
+                    Total = table.Column<double>(nullable: false),
+                    TotalAmount = table.Column<double>(nullable: false),
+                    ItemCount = table.Column<int>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    CreatedBy = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_Order_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 schema: "auth",
                 table: "Role",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("62a0d233-610d-45d2-8fa8-daa6bec4dd42"), "user" },
-                    { new Guid("42f106fb-a798-4483-80bf-2dc9c09dbde0"), "Manager" },
-                    { new Guid("4ec3db99-2fec-433c-bb7f-aa67fe5b6af7"), "Admin" },
-                    { new Guid("57fb82f6-9bc6-4f6c-b581-e67fd0549ba5"), "Developer" }
+                    { new Guid("7254bba1-a9aa-4ea1-91b0-efc9398724b1"), "user" },
+                    { new Guid("ae4e8893-d9be-4add-992e-77810a61e224"), "Manager" },
+                    { new Guid("eead8ae0-d7e4-408f-b9bf-cba8a71a0800"), "Admin" },
+                    { new Guid("b4e30a4c-3f52-4a3f-9685-34d4d970b9f3"), "Developer" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_ProductId",
+                table: "Order",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_ProductGroupId",
@@ -129,14 +160,14 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Order");
 
             migrationBuilder.DropTable(
                 name: "UserRole",
                 schema: "auth");
 
             migrationBuilder.DropTable(
-                name: "ProductGroup");
+                name: "Product");
 
             migrationBuilder.DropTable(
                 name: "Role",
@@ -145,6 +176,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
             migrationBuilder.DropTable(
                 name: "User",
                 schema: "auth");
+
+            migrationBuilder.DropTable(
+                name: "ProductGroup");
         }
     }
 }

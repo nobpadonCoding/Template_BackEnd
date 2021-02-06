@@ -10,8 +10,8 @@ using NetCoreAPI_Template_v3_with_auth.Data;
 namespace NetCoreAPI_Template_v3_with_auth.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20210204135559_smileShopCreate")]
-    partial class smileShopCreate
+    [Migration("20210206071912_smileShopCreate01")]
+    partial class smileShopCreate01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,44 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                 .HasAnnotation("ProductVersion", "3.1.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.Orders", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedBy")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Discount")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ItemCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ProductPrice")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TotalAmount")
+                        .HasColumnType("float");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Order");
+                });
 
             modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.Product", b =>
                 {
@@ -86,22 +124,22 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("62a0d233-610d-45d2-8fa8-daa6bec4dd42"),
+                            Id = new Guid("7254bba1-a9aa-4ea1-91b0-efc9398724b1"),
                             Name = "user"
                         },
                         new
                         {
-                            Id = new Guid("42f106fb-a798-4483-80bf-2dc9c09dbde0"),
+                            Id = new Guid("ae4e8893-d9be-4add-992e-77810a61e224"),
                             Name = "Manager"
                         },
                         new
                         {
-                            Id = new Guid("4ec3db99-2fec-433c-bb7f-aa67fe5b6af7"),
+                            Id = new Guid("eead8ae0-d7e4-408f-b9bf-cba8a71a0800"),
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("57fb82f6-9bc6-4f6c-b581-e67fd0549ba5"),
+                            Id = new Guid("b4e30a4c-3f52-4a3f-9685-34d4d970b9f3"),
                             Name = "Developer"
                         });
                 });
@@ -143,6 +181,15 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRole","auth");
+                });
+
+            modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.Orders", b =>
+                {
+                    b.HasOne("NetCoreAPI_Template_v3_with_auth.Models.Product", "Products")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.Product", b =>

@@ -19,6 +19,44 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.Orders", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedBy")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Discount")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ItemCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ProductPrice")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TotalAmount")
+                        .HasColumnType("float");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Order");
+                });
+
             modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -84,22 +122,22 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6200d70b-07c2-4df7-a6b4-77782174bfec"),
+                            Id = new Guid("7254bba1-a9aa-4ea1-91b0-efc9398724b1"),
                             Name = "user"
                         },
                         new
                         {
-                            Id = new Guid("3793bccb-ea45-4eb4-876b-c272b9ac4931"),
+                            Id = new Guid("ae4e8893-d9be-4add-992e-77810a61e224"),
                             Name = "Manager"
                         },
                         new
                         {
-                            Id = new Guid("59e892f0-19cc-4ff7-ad63-5d0d0ec574ff"),
+                            Id = new Guid("eead8ae0-d7e4-408f-b9bf-cba8a71a0800"),
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("1eb719bb-fe61-426f-86e0-495d6c349816"),
+                            Id = new Guid("b4e30a4c-3f52-4a3f-9685-34d4d970b9f3"),
                             Name = "Developer"
                         });
                 });
@@ -141,6 +179,15 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRole","auth");
+                });
+
+            modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.Orders", b =>
+                {
+                    b.HasOne("NetCoreAPI_Template_v3_with_auth.Models.Product", "Products")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.Product", b =>
