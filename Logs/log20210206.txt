@@ -331,3 +331,4 @@ Error Number:207,State:1,Class:16
    at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
    at NetCoreAPI_Template_v3_with_auth.Services.SmileShop.SmileShopService.AddOrder(List`1 newOrder) in D:\Template\BackEnd\NetCoreAPI_Template_v3_with_auth-master\NetCoreAPI_Template_v3_with_auth\Services\SmileShop\SmileShopService.cs:line 262
 2021-02-06 20:59:22.076 +07:00 [ERR] An error occurred while updating the entries. See the inner exception for details.
+2021-02-06 21:00:18.099 +07:00 [INF] Starting web host
