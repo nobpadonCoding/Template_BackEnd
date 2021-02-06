@@ -3,8 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 # User-specific files
-# Logs/*.txt
-# Migrations/*.cs
+Logs/*.txt
+Migrations/*.cs
 *.rsuser
 *.suo
 *.user
@@ -13,7 +13,7 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 # *.txt
-#####s
+########
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

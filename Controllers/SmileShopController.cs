@@ -17,7 +17,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
             _smileService = smileService;
 
         }
-        
+        //test
         [HttpGet("Products")]
         public async Task<IActionResult> GetAllProducts()
         {
