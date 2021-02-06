@@ -13,7 +13,7 @@ Migrations/*.cs
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 # *.txt
-###
+#####s
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
