@@ -55,7 +55,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                     StockCount = newProduct.StockCount,
                     CreatedDate = Now(),
                     // CreatedBy = _httpContext.HttpContext.User.FindFirstValue(ClaimTypes.Name),
-                    CreatedBy = GetUsername(),
+                    CreatedBy = GetUserId(),
                     ProductGroupId = newProduct.ProductGroupId
                 };
 
@@ -298,6 +298,42 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                 _log.LogError(ex.Message);
                 return ResponseResult.Failure<GetOrderDto>(ex.Message);
             }
+        }
+
+        public async Task<ServiceResponse<List<ProductGroup>>> GetProducGrouptFilter(ProductGroupFilterDto ProductGroupFilter)
+        {
+            var productgroup_queryable = _dbContext.ProductGroups.AsQueryable();
+
+            //Filter
+            if (!string.IsNullOrWhiteSpace(ProductGroupFilter.ProductGroupName))
+            {
+                productgroup_queryable = productgroup_queryable.Where(x => x.Name.Contains(ProductGroupFilter.ProductGroupName));
+            }
+
+            // if (!string.IsNullOrWhiteSpace(EmployeeFilter.EmployeeDepartment))
+            // {
+            //     queryable = queryable.Where(x => x.Department.Contains(EmployeeFilter.EmployeeDepartment));
+            // }
+
+            //Ordering
+            if (!string.IsNullOrWhiteSpace(ProductGroupFilter.OrderingField))
+            {
+                try
+                {
+                    productgroup_queryable = productgroup_queryable.OrderBy($"{ProductGroupFilter.OrderingField} {(ProductGroupFilter.AscendingOrder ? "ascending" : "descending")}");
+                }
+                catch
+                {
+                    return ResponseResultWithPagination.Failure<List<ProductGroup>>($"Could not order by field: {ProductGroupFilter.OrderingField}");
+                }
+            }
+
+            var paginationResult = await _httpContext.HttpContext
+                .InsertPaginationParametersInResponse(productgroup_queryable, ProductGroupFilter.RecordsPerPage, ProductGroupFilter.Page);
+
+            var ProductGroupFilter_return = await productgroup_queryable.Paginate(ProductGroupFilter).ToListAsync();
+
+            return ResponseResultWithPagination.Success(ProductGroupFilter_return, paginationResult);
         }
     }
 }

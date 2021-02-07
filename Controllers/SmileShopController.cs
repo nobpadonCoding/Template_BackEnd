@@ -7,7 +7,7 @@ using NetCoreAPI_Template_v3_with_auth.Services.SmileShop;
 
 namespace NetCoreAPI_Template_v3_with_auth.Controllers
 {
-    [Authorize]
+    // [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class SmileShopController : ControllerBase
@@ -59,6 +59,12 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
         public async Task<IActionResult> GetProductFilter([FromQuery] ProductFilterDto ProductFilter)
         {
             return Ok(await _smileService.GetProductFilter(ProductFilter));
+        }
+
+        [HttpGet("ProductGroup/filter")]
+        public async Task<IActionResult> GetProductFroupFilter([FromQuery] ProductGroupFilterDto ProductGroupFilter)
+        {
+            return Ok(await _smileService.GetProducGrouptFilter(ProductGroupFilter));
         }
 
         [HttpPost("Order")]
