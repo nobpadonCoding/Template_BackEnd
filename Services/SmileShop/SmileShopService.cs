@@ -15,14 +15,14 @@ using System.Security.Claims;
 
 namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 {
-    public class SmileShopService : ServiceBase,ISmileShopService
+    public class SmileShopService : ServiceBase, ISmileShopService
     {
         private readonly AppDBContext _dbContext;
         private readonly IMapper _mapper;
         private readonly ILogger<SmileShopService> _log;
         private readonly IHttpContextAccessor _httpContext;
 
-        public SmileShopService(AppDBContext dbContext, IMapper mapper, ILogger<SmileShopService> log, IHttpContextAccessor httpContext) 
+        public SmileShopService(AppDBContext dbContext, IMapper mapper, ILogger<SmileShopService> log, IHttpContextAccessor httpContext)
             : base(dbContext, mapper, httpContext)
         {
             _dbContext = dbContext;
@@ -253,6 +253,32 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
         {
             try
             {
+                // List<int> StockCount_return = new List<int>();
+                foreach (var item in newOrder)
+                {
+                    var product = _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
+                    if (!(product is null))
+                    {
+                        if (product.Result.StockCount <= 0)
+                        {
+                            _log.LogError($"{product.Result.Name} StockCount < 0");
+                            return ResponseResult.Failure<GetOrderDto>($"{product.Result.Name} StockCount < 0");
+                        }
+                        else
+                        {
+                            var xxx = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
+                            var StockCount = product.Result.StockCount - 1;
+                            xxx.Name=product.Result.Name;
+                            xxx.Price=product.Result.Price;
+                            xxx.StockCount = StockCount;
+                            xxx.ProductGroupId= xxx.ProductGroupId;
+                            // StockCount_return.Append(StockCount);
+                            _dbContext.Products.Update(xxx);
+                        }
+                    }
+                }
+                            // await _dbContext.SaveChangesAsync();
+
                 var runNo = new OrderNo
                 {
                     CreatedDate = Now()
@@ -264,15 +290,16 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                 var order_ch = _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderNoId == runNo.Id);
                 if (order_ch is null)
                 {
-                     _log.LogError($"Order id {runNo.Id} duplicate");
+                    _log.LogError($"Order id {runNo.Id} duplicate");
                     return ResponseResult.Failure<GetOrderDto>($"Order id {runNo.Id} duplicate");
                 }
+
 
                 foreach (var item in newOrder)
                 {
                     var order_new = new Orders
                     {
-                        OrderNoId= runNo.Id,
+                        OrderNoId = runNo.Id,
                         ProductId = item.ProductId,
                         ProductPrice = item.ProductPrice,
                         Discount = item.ProductDiscount,
@@ -285,7 +312,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                     await _dbContext.SaveChangesAsync();
                 }
 
-                var get_order_retuen = _dbContext.Orders.Where(x=>x.OrderNoId==runNo.Id).ToListAsync();
+                var get_order_retuen = _dbContext.Orders.Where(x => x.OrderNoId == runNo.Id).ToListAsync();
                 // var idorder = _dbContext.OrderNos.Where(x=>x.Id==runNo.Id).ToListAsync();
 
                 var order_retuen = _mapper.Map<GetOrderDto>(get_order_retuen);
@@ -341,7 +368,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
             try
             {
                 var product = await _dbContext.Products
-                    .Include(x=>x.ProductGroup)
+                    .Include(x => x.ProductGroup)
                     .FirstOrDefaultAsync(x => x.Id == deleteProductId);
                 //check Employee
                 if (product is null)
