@@ -335,5 +335,73 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 
             return ResponseResultWithPagination.Success(ProductGroupFilter_return, paginationResult);
         }
+
+        public async Task<ServiceResponse<GetProductDto>> DeleteProduct(int deleteProductId)
+        {
+            try
+            {
+                var product = await _dbContext.Products
+                    .Include(x=>x.ProductGroup)
+                    .FirstOrDefaultAsync(x => x.Id == deleteProductId);
+                //check Employee
+                if (product is null)
+                {
+                    return ResponseResult.Failure<GetProductDto>($"employee id {deleteProductId} not found");
+                }
+
+                //mapper Dto and return
+                var product_return = _mapper.Map<GetProductDto>(product);
+
+                //remove database
+                _dbContext.Products.RemoveRange(product);
+                await _dbContext.SaveChangesAsync();
+
+                _log.LogInformation("Delete product done.");
+                return ResponseResult.Success(product_return, "success");
+            }
+            catch (Exception ex)
+            {
+
+                _log.LogError(ex.Message);
+                return ResponseResult.Failure<GetProductDto>(ex.Message);
+            }
+        }
+
+        public async Task<ServiceResponse<GetProductGroupDto>> DeleteProductGroup(int ProductGroupId)
+        {
+            try
+            {
+                //caheck department
+                var productgroup = await _dbContext.ProductGroups.FirstOrDefaultAsync(x => x.Id == ProductGroupId);
+                if (productgroup is null)
+                {
+                    return ResponseResult.Failure<GetProductGroupDto>($"ProductGroup id {ProductGroupId} not found");
+                }
+
+                //check department is use?
+                var productgroup_isuse = await _dbContext.Products.FirstOrDefaultAsync(x => x.ProductGroupId == ProductGroupId);
+                if (!(productgroup_isuse is null))
+                {
+                    var productgroup_Active = _mapper.Map<GetProductGroupDto>(productgroup);
+                    return ResponseResult.Failure<GetProductGroupDto>($"ProductGroup name {productgroup_Active.Name} product is Use");
+                }
+
+                //mapper Dto and return
+                var department_return = _mapper.Map<GetProductGroupDto>(productgroup);
+
+                //remove database
+                _dbContext.ProductGroups.RemoveRange(productgroup);
+                await _dbContext.SaveChangesAsync();
+
+                _log.LogInformation($"Delete Department id {ProductGroupId} done.");
+                return ResponseResult.Success(department_return, "success");
+            }
+            catch (Exception ex)
+            {
+
+                _log.LogError(ex.Message);
+                return ResponseResult.Failure<GetProductGroupDto>(ex.Message);
+            }
+        }
     }
 }
