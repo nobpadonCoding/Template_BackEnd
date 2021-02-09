@@ -26,8 +26,14 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -68,6 +74,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.Property<double>("TotalAmount")
                         .HasColumnType("float");
 
+                    b.Property<bool>("status")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderNoId");
@@ -99,6 +108,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.Property<int>("ProductGroupId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
                     b.Property<int>("StockCount")
                         .HasColumnType("int");
 
@@ -116,8 +128,17 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -142,22 +163,22 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d87e6497-2728-4222-bfcf-00684686f1d7"),
+                            Id = new Guid("701ba85e-b85d-4622-a52e-5aa2d346d1f9"),
                             Name = "user"
                         },
                         new
                         {
-                            Id = new Guid("0db2baf5-b6f7-4367-a25b-dabf405f7514"),
+                            Id = new Guid("01d31708-3e6e-4a41-bf87-b189fc7a3313"),
                             Name = "Manager"
                         },
                         new
                         {
-                            Id = new Guid("6587c971-9002-4312-8c0d-3e2e9190762e"),
+                            Id = new Guid("fa17170f-ac7f-4ac6-b66d-e58be9ee1d15"),
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("3f8ec5f4-3512-4e26-8980-497efb3cd738"),
+                            Id = new Guid("4ba3ef86-a8e7-44dc-a6cf-bc521762f59a"),
                             Name = "Developer"
                         });
                 });
@@ -210,7 +231,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                         .IsRequired();
 
                     b.HasOne("NetCoreAPI_Template_v3_with_auth.Models.Product", "Product")
-                        .WithMany("Orders")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

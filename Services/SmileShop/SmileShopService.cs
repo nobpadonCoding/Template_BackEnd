@@ -22,8 +22,8 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
         private readonly ILogger<SmileShopService> _log;
         private readonly IHttpContextAccessor _httpContext;
 
-        public SmileShopService(AppDBContext dbContext, IMapper mapper, ILogger<SmileShopService> log, IHttpContextAccessor httpContext)
-            : base(dbContext, mapper, httpContext)
+        public SmileShopService(AppDBContext dbContext, IMapper mapper, 
+        ILogger<SmileShopService> log, IHttpContextAccessor httpContext): base(dbContext, mapper, httpContext)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -46,6 +46,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                 {
                     return ResponseResult.Failure<GetProductDto>($"ProductGroup id {newProduct.ProductGroupId} not Found!");
                 }
+                
                 // var strDate = _serviceBase.Now().ToString("MM/dd/yyyy HH:mm:ss");
                 // DateTime CreatedDate = DateTime.Parse(strDate);
                 var product_new = new Product
@@ -187,13 +188,19 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
         {
             try
             {
-                //check department
+                //check Product
                 var product = await _dbContext.Products
                 .Include(x => x.ProductGroup)
                 .FirstOrDefaultAsync(x => x.Id == editProductId);
                 if (product is null)
                 {
                     return ResponseResult.Failure<GetProductDto>($"Position id {editProductId} not found");
+                }
+
+                var productGroup = await _dbContext.ProductGroups.FirstOrDefaultAsync(x => x.Id == editProduct.ProductGroupId);
+                if (productGroup is null)
+                {
+                    return ResponseResult.Failure<GetProductDto>($"ProductGroup id {editProduct.ProductGroupId} not Found!");
                 }
 
                 //assign value

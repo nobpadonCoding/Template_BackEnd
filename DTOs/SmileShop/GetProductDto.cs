@@ -11,6 +11,7 @@ namespace NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop
         public DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public int ProductGroupId { get; set; }
+        public Boolean Status { get; set; }
         public string ProductGroupName { get; set; }
     }
 }
