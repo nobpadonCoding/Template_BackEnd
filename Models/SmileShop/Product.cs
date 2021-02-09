@@ -15,6 +15,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Models
         public DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public int ProductGroupId { get; set; }
+        public Boolean Status { get; set; }= true;
         public ProductGroup ProductGroup { get; set; }
         public List<Orders> Orders { get; set; }
     }
