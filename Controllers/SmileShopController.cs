@@ -18,7 +18,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
             _smileService = smileService;
 
         }
-        
+
         [HttpGet("Products")]
         public async Task<IActionResult> GetAllProducts()
         {
@@ -44,9 +44,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
         }
 
         [HttpPut("Product/Update/{editProductId}")]
-        public async Task<IActionResult> EditProduct(EditProductDto editProduct)
+        public async Task<IActionResult> EditProduct(int editProductId, EditProductDto editProduct)
         {
-            return Ok(await _smileService.EditProduct(editProduct));
+            return Ok(await _smileService.EditProduct(editProductId, editProduct));
         }
 
         [HttpDelete("Product/{ProductId}")]
@@ -55,7 +55,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
             return Ok(await _smileService.DeleteProduct(ProductId));
         }
 
-         [HttpDelete("ProductGroup/{ProductGroupId}")]
+        [HttpDelete("ProductGroup/{ProductGroupId}")]
         public async Task<IActionResult> DeleteProductGroup(int ProductGroupId)
         {
             return Ok(await _smileService.DeleteProductGroup(ProductGroupId));

@@ -183,15 +183,17 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
             }
         }
 
-        public async Task<ServiceResponse<GetProductDto>> EditProduct(EditProductDto editProduct)
+        public async Task<ServiceResponse<GetProductDto>> EditProduct(int editProductId, EditProductDto editProduct)
         {
             try
             {
                 //check department
-                var product = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == editProduct.ProductId);
+                var product = await _dbContext.Products
+                .Include(x => x.ProductGroup)
+                .FirstOrDefaultAsync(x => x.Id == editProductId);
                 if (product is null)
                 {
-                    return ResponseResult.Failure<GetProductDto>($"Position id {editProduct.ProductId} not found");
+                    return ResponseResult.Failure<GetProductDto>($"Position id {editProductId} not found");
                 }
 
                 //assign value
@@ -268,16 +270,16 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                         {
                             var xxx = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
                             var StockCount = product.Result.StockCount - 1;
-                            xxx.Name=product.Result.Name;
-                            xxx.Price=product.Result.Price;
+                            xxx.Name = product.Result.Name;
+                            xxx.Price = product.Result.Price;
                             xxx.StockCount = StockCount;
-                            xxx.ProductGroupId= xxx.ProductGroupId;
+                            xxx.ProductGroupId = xxx.ProductGroupId;
                             // StockCount_return.Append(StockCount);
                             _dbContext.Products.Update(xxx);
                         }
                     }
                 }
-                            // await _dbContext.SaveChangesAsync();
+                // await _dbContext.SaveChangesAsync();
 
                 var runNo = new OrderNo
                 {
@@ -312,12 +314,12 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                     await _dbContext.SaveChangesAsync();
                 }
 
-                var get_order_retuen = _dbContext.Orders.Where(x => x.OrderNoId == runNo.Id).ToListAsync();
+                var get_order_retuen = await _dbContext.Orders.Where(x => x.OrderNoId == runNo.Id).FirstOrDefaultAsync();
                 // var idorder = _dbContext.OrderNos.Where(x=>x.Id==runNo.Id).ToListAsync();
 
                 var order_retuen = _mapper.Map<GetOrderDto>(get_order_retuen);
                 _log.LogInformation($"Add Order Success");
-                return ResponseResult.Success<GetOrderDto>(null, "Success");
+                return ResponseResult.Success<GetOrderDto>(order_retuen, "Success");
             }
             catch (Exception ex)
             {
