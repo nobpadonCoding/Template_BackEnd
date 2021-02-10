@@ -15,6 +15,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
         Task<ServiceResponse<List<Product>>> GetProductFilter(ProductFilterDto ProductFilter);
         Task<ServiceResponse<List<ProductGroup>>> GetProducGrouptFilter(ProductGroupFilterDto ProductGroupFilter);
         Task<ServiceResponse<GetProductDto>> EditProduct(int editProductId, EditProductDto editProduct);
+        Task<ServiceResponse<GetProductGroupDto>> EditProductGroup(int editProductGroupId, EditProductGroupDto editProductGroup);
         Task<ServiceResponse<GetProductDto>> DeleteProduct(int ProductId);
         Task<ServiceResponse<GetProductGroupDto>> DeleteProductGroup(int ProductGroupId);
         Task<ServiceResponse<List<GetOrderDto>>> GetOrder();
