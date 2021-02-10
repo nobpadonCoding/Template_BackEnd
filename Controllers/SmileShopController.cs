@@ -49,6 +49,12 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
             return Ok(await _smileService.EditProduct(editProductId, editProduct));
         }
 
+        [HttpPut("ProductGroup/Update/{editProductGroup}")]
+        public async Task<IActionResult> EditProductGroup(int editProductGroupId, EditProductGroupDto editProductGroup)
+        {
+            return Ok(await _smileService.EditProductGroup(editProductGroupId, editProductGroup));
+        }
+
         [HttpDelete("Product/{ProductId}")]
         public async Task<IActionResult> DeleteProduct(int ProductId)
         {
