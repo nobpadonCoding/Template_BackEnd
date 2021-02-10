@@ -114,9 +114,14 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.Property<int>("StockCount")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProductGroupId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Product");
                 });
@@ -140,7 +145,15 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserIdCreated")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ProductGroup");
                 });
@@ -163,22 +176,22 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("701ba85e-b85d-4622-a52e-5aa2d346d1f9"),
+                            Id = new Guid("c6f662b9-da4e-466b-8fad-8181885bbbee"),
                             Name = "user"
                         },
                         new
                         {
-                            Id = new Guid("01d31708-3e6e-4a41-bf87-b189fc7a3313"),
+                            Id = new Guid("d98e81a7-50ce-4430-b4ad-dce9fc930aa0"),
                             Name = "Manager"
                         },
                         new
                         {
-                            Id = new Guid("fa17170f-ac7f-4ac6-b66d-e58be9ee1d15"),
+                            Id = new Guid("98bbdbb2-f549-4dcb-bc2e-1cc86c256655"),
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("4ba3ef86-a8e7-44dc-a6cf-bc521762f59a"),
+                            Id = new Guid("9dd9b621-167d-4697-9417-04e5574e06bb"),
                             Name = "Developer"
                         });
                 });
@@ -244,6 +257,19 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                         .HasForeignKey("ProductGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("NetCoreAPI_Template_v3_with_auth.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.ProductGroup", b =>
+                {
+                    b.HasOne("NetCoreAPI_Template_v3_with_auth.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.UserRole", b =>

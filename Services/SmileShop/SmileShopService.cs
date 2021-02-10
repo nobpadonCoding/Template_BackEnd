@@ -22,8 +22,8 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
         private readonly ILogger<SmileShopService> _log;
         private readonly IHttpContextAccessor _httpContext;
 
-        public SmileShopService(AppDBContext dbContext, IMapper mapper, 
-        ILogger<SmileShopService> log, IHttpContextAccessor httpContext): base(dbContext, mapper, httpContext)
+        public SmileShopService(AppDBContext dbContext, IMapper mapper,
+        ILogger<SmileShopService> log, IHttpContextAccessor httpContext) : base(dbContext, mapper, httpContext)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -46,17 +46,15 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                 {
                     return ResponseResult.Failure<GetProductDto>($"ProductGroup id {newProduct.ProductGroupId} not Found!");
                 }
-                
-                // var strDate = _serviceBase.Now().ToString("MM/dd/yyyy HH:mm:ss");
-                // DateTime CreatedDate = DateTime.Parse(strDate);
+
                 var product_new = new Product
                 {
                     Name = newProduct.ProductName,
                     Price = newProduct.Price,
                     StockCount = newProduct.StockCount,
                     CreatedDate = Now(),
-                    // CreatedBy = _httpContext.HttpContext.User.FindFirstValue(ClaimTypes.Name),
-                    CreatedBy = GetUserId(),
+                    CreatedBy = GetUsername(),
+                    UserId = Guid.Parse(GetUserId()),
                     ProductGroupId = newProduct.ProductGroupId
                 };
 
@@ -88,7 +86,10 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 
                 var productGroup_new = new ProductGroup
                 {
-                    Name = newProductGroup.ProductGroupName
+                    Name = newProductGroup.ProductGroupName,
+                    CreatedBy = GetUsername(),
+                    UserIdCreated = Guid.Parse(GetUserId()),
+                    CreatedDate = Now()
                 };
 
                 _dbContext.ProductGroups.Add(productGroup_new);
@@ -262,7 +263,6 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
         {
             try
             {
-                // List<int> StockCount_return = new List<int>();
                 foreach (var item in newOrder)
                 {
                     var product = _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
