@@ -472,5 +472,33 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                 return ResponseResult.Failure<GetProductGroupDto>(ex.Message);
             }
         }
+
+        public async Task<ServiceResponse<GetProductGroupDto>> GetProductGroupById(int ProductGroupId)
+        {
+            try
+            {
+                var productgroup = await _dbContext.ProductGroups
+                    .FirstOrDefaultAsync(x => x.Id == ProductGroupId);
+
+                //check employee
+                if (productgroup is null)
+                {
+                    _log.LogError($"employee id {ProductGroupId} not found");
+                    return ResponseResult.Failure<GetProductGroupDto>($"ProductGroup id {ProductGroupId} not found");
+                }
+
+                //mapper Dto and return
+                var dto = _mapper.Map<GetProductGroupDto>(productgroup);
+
+                _log.LogInformation("Get ProductGroup Success");
+                return ResponseResult.Success(dto, "Success");
+            }
+            catch (Exception ex)
+            {
+
+                _log.LogError(ex.Message);
+                return ResponseResult.Failure<GetProductGroupDto>(ex.Message);
+            }
+        }
     }
 }

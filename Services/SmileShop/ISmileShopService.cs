@@ -20,5 +20,6 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
         Task<ServiceResponse<GetProductGroupDto>> DeleteProductGroup(int ProductGroupId);
         Task<ServiceResponse<List<GetOrderDto>>> GetOrder();
         Task<ServiceResponse<GetOrderDto>> AddOrder(List<AddOrderDto> newOrder);
+        Task<ServiceResponse<GetProductGroupDto>> GetProductGroupById(int ProductGroupId);
     }
 }

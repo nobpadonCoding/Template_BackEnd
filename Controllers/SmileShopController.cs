@@ -31,12 +31,6 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
             return Ok(await _smileService.GetProductById(ProductId));
         }
 
-        [HttpGet("ProductGroups")]
-        public async Task<IActionResult> GetAllProductGroups()
-        {
-            return Ok(await _smileService.GetAllProductGroups());
-        }
-
         [HttpPost("Products")]
         public async Task<IActionResult> AddProduct(AddProductDto newProduct)
         {
@@ -49,28 +43,10 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
             return Ok(await _smileService.EditProduct(editProductId, editProduct));
         }
 
-        [HttpPut("ProductGroup/Update/{editProductGroup}")]
-        public async Task<IActionResult> EditProductGroup(int editProductGroupId, EditProductGroupDto editProductGroup)
-        {
-            return Ok(await _smileService.EditProductGroup(editProductGroupId, editProductGroup));
-        }
-
         [HttpDelete("Product/{ProductId}")]
         public async Task<IActionResult> DeleteProduct(int ProductId)
         {
             return Ok(await _smileService.DeleteProduct(ProductId));
-        }
-
-        [HttpDelete("ProductGroup/{ProductGroupId}")]
-        public async Task<IActionResult> DeleteProductGroup(int ProductGroupId)
-        {
-            return Ok(await _smileService.DeleteProductGroup(ProductGroupId));
-        }
-
-        [HttpPost("ProductGroups")]
-        public async Task<IActionResult> AddProductGroup(AddProductGroupDto newProductGroup)
-        {
-            return Ok(await _smileService.AddProductGroup(newProductGroup));
         }
 
         [HttpGet("Products/filter")]
@@ -79,16 +55,51 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
             return Ok(await _smileService.GetProductFilter(ProductFilter));
         }
 
-        [HttpGet("ProductGroup/filter")]
-        public async Task<IActionResult> GetProductFroupFilter([FromQuery] ProductGroupFilterDto ProductGroupFilter)
-        {
-            return Ok(await _smileService.GetProducGrouptFilter(ProductGroupFilter));
-        }
+        //Order
 
         [HttpPost("Order")]
         public async Task<IActionResult> AddOrder(List<AddOrderDto> newOrder)
         {
             return Ok(await _smileService.AddOrder(newOrder));
         }
+
+        //product Group
+
+        [HttpGet("ProductGroups")]
+        public async Task<IActionResult> GetAllProductGroups()
+        {
+            return Ok(await _smileService.GetAllProductGroups());
+        }
+
+         [HttpGet("ProductGroups/{ProductGroupId}")]
+        public async Task<IActionResult> GetProductGroupById(int ProductGroupId)
+        {
+            return Ok(await _smileService.GetProductGroupById(ProductGroupId));
+        }
+
+        [HttpPost("ProductGroups")]
+        public async Task<IActionResult> AddProductGroup(AddProductGroupDto newProductGroup)
+        {
+            return Ok(await _smileService.AddProductGroup(newProductGroup));
+        }
+
+        [HttpPut("ProductGroup/Update/{editProductGroupId}")]
+        public async Task<IActionResult> EditProductGroup(int editProductGroupId, EditProductGroupDto editProductGroup)
+        {
+            return Ok(await _smileService.EditProductGroup(editProductGroupId, editProductGroup));
+        }
+
+        [HttpDelete("ProductGroup/{ProductGroupId}")]
+        public async Task<IActionResult> DeleteProductGroup(int ProductGroupId)
+        {
+            return Ok(await _smileService.DeleteProductGroup(ProductGroupId));
+        }
+
+        [HttpGet("ProductGroup/filter")]
+        public async Task<IActionResult> GetProductFroupFilter([FromQuery] ProductGroupFilterDto ProductGroupFilter)
+        {
+            return Ok(await _smileService.GetProducGrouptFilter(ProductGroupFilter));
+        }
+
     }
 }
