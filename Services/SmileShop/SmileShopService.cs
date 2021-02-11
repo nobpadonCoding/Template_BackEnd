@@ -208,6 +208,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                 product.Name = editProduct.ProductName;
                 product.Price = editProduct.ProductPrice;
                 product.ProductGroupId = editProduct.ProductGroupId;
+                product.Status = editProduct.ProductStatus;
 
                 //update database
                 _dbContext.Products.Update(product);
