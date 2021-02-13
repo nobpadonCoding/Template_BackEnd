@@ -237,8 +237,8 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                 //check employee
                 if (product is null)
                 {
-                    _log.LogError($"employee id {ProductId} not found");
-                    return ResponseResult.Failure<GetProductDto>($"employee id {ProductId} not found");
+                    _log.LogError($"Product id {ProductId} not found");
+                    return ResponseResult.Failure<GetProductDto>($"Product id {ProductId} not found");
                 }
 
                 //mapper Dto and return
@@ -380,10 +380,10 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                 var product = await _dbContext.Products
                     .Include(x => x.ProductGroup)
                     .FirstOrDefaultAsync(x => x.Id == deleteProductId);
-                //check Employee
+                //check Product
                 if (product is null)
                 {
-                    return ResponseResult.Failure<GetProductDto>($"employee id {deleteProductId} not found");
+                    return ResponseResult.Failure<GetProductDto>($"Product id {deleteProductId} not found");
                 }
 
                 //mapper Dto and return
@@ -481,10 +481,10 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                 var productgroup = await _dbContext.ProductGroups
                     .FirstOrDefaultAsync(x => x.Id == ProductGroupId);
 
-                //check employee
+                //check Product Group
                 if (productgroup is null)
                 {
-                    _log.LogError($"employee id {ProductGroupId} not found");
+                    _log.LogError($"ProductGroup id {ProductGroupId} not found");
                     return ResponseResult.Failure<GetProductGroupDto>($"ProductGroup id {ProductGroupId} not found");
                 }
 
