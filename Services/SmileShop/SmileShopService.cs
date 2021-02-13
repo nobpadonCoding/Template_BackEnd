@@ -434,7 +434,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                 _dbContext.ProductGroups.RemoveRange(productgroup);
                 await _dbContext.SaveChangesAsync();
 
-                _log.LogInformation($"Delete Department id {ProductGroupId} done.");
+                _log.LogInformation($"Delete ProductGroup id {ProductGroupId} done.");
                 return ResponseResult.Success(department_return, "success");
             }
             catch (Exception ex)
