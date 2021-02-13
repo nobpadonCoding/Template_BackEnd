@@ -128,6 +128,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
             {
                 try
                 {
+                    _log.LogInformation($"Order by Success");
                     products_queryable = products_queryable.OrderBy($"{ProductFilter.OrderingField} {(ProductFilter.AscendingOrder ? "ascending" : "descending")}");
                 }
                 catch
@@ -140,6 +141,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                 .InsertPaginationParametersInResponse(products_queryable, ProductFilter.RecordsPerPage, ProductFilter.Page);
 
             var ProductFilter_return = await products_queryable.Paginate(ProductFilter).ToListAsync();
+            _log.LogInformation($"Product Filter Success");
 
             return ResponseResultWithPagination.Success(ProductFilter_return, paginationResult);
         }
@@ -357,6 +359,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
             {
                 try
                 {
+                    _log.LogInformation($"Order by Success");
                     productgroup_queryable = productgroup_queryable.OrderBy($"{ProductGroupFilter.OrderingField} {(ProductGroupFilter.AscendingOrder ? "ascending" : "descending")}");
                 }
                 catch
@@ -369,6 +372,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
                 .InsertPaginationParametersInResponse(productgroup_queryable, ProductGroupFilter.RecordsPerPage, ProductGroupFilter.Page);
 
             var ProductGroupFilter_return = await productgroup_queryable.Paginate(ProductGroupFilter).ToListAsync();
+            _log.LogInformation($"ProducGrouptFilter Success");
 
             return ResponseResultWithPagination.Success(ProductGroupFilter_return, paginationResult);
         }
