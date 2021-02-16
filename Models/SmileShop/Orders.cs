@@ -19,7 +19,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Models
         public double TotalAmount { get; set; }
         public int ItemCount { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
+        public Guid CreatedBy { get; set; }
         public Boolean status { get; set; } = true;
         public Product Product { get; set; }
     }

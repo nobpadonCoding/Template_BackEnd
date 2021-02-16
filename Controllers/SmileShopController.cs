@@ -57,11 +57,11 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
 
         //Order
 
-        [HttpPost("Order")]
-        public async Task<IActionResult> AddOrder(List<AddOrderDto> newOrder)
-        {
-            return Ok(await _smileService.AddOrder(newOrder));
-        }
+        // [HttpPost("Order")]
+        // public async Task<IActionResult> AddOrder(List<AddOrderDto> newOrder)
+        // {
+        //     return Ok(await _smileService.AddOrder(newOrder));
+        // }
 
         //product Group
 
@@ -99,6 +99,12 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
         public async Task<IActionResult> GetProductFroupFilter([FromQuery] ProductGroupFilterDto ProductGroupFilter)
         {
             return Ok(await _smileService.GetProducGrouptFilter(ProductGroupFilter));
+        }
+
+        [HttpPost("Stock")]
+        public async Task<IActionResult> AddStock(AddstockDto newStock)
+        {
+            return Ok(await _smileService.AddStock(newStock));
         }
 
     }

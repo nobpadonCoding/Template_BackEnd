@@ -38,7 +38,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Data
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductGroup> ProductGroups { get; set; }
-        public DbSet<Orders> Orders { get; set; }
-        public DbSet<OrderNo> OrderNos { get; set; }
+        // public DbSet<Orders> Orders { get; set; }
+        // public DbSet<OrderNo> OrderNos { get; set; }
+        public DbSet<Store> Stores { get; set; }
+        // public DbSet<StoreHeader> StoreHeaders { get; set; }
     }
 }

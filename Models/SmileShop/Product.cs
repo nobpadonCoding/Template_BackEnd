@@ -8,16 +8,17 @@ namespace NetCoreAPI_Template_v3_with_auth.Models
     [Table("Product")]
     public class Product
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public int StockCount { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public Guid UserId { get; set; }
-        public User User { get; set; }
+        public Guid CreatedById { get; set; }
+        public User CreatedBy { get; set; }
+        public bool Status { get; set; }= true;
+        [Required]
         public int ProductGroupId { get; set; }
-        public Boolean Status { get; set; }= true;
         public ProductGroup ProductGroup { get; set; }
     }
 }
