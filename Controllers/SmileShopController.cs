@@ -107,5 +107,11 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
             return Ok(await _smileService.AddStock(newStock));
         }
 
+        [HttpGet("Stock/filter")]
+        public async Task<IActionResult> GetStoreFilter([FromQuery] StoreFilterDto StoreFilter)
+        {
+            return Ok(await _smileService.GetStoreFilter(StoreFilter));
+        }
+
     }
 }

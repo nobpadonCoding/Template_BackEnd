@@ -100,22 +100,22 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9b27d44f-d012-4a2a-9552-2607f5ee24a2"),
+                            Id = new Guid("3b1712e4-6bcc-4d83-b9c1-a373a6a2f38d"),
                             Name = "user"
                         },
                         new
                         {
-                            Id = new Guid("4ace52e4-2f71-4bf4-ab3a-ba72a12ea29c"),
+                            Id = new Guid("8d35e13c-bd79-4a66-993a-97282adc7a19"),
                             Name = "Manager"
                         },
                         new
                         {
-                            Id = new Guid("8a1fe64b-1324-4075-8402-82641d508309"),
+                            Id = new Guid("014d4be9-a2f8-4d4e-95b8-0a34d4f6d5e0"),
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("18429656-90a8-479a-839b-5b099e94d430"),
+                            Id = new Guid("72a21cd0-2612-42a8-835a-9467553cd74b"),
                             Name = "Developer"
                         });
                 });
@@ -133,7 +133,13 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ProductGroupId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductStockCount")
                         .HasColumnType("int");
 
                     b.Property<int>("Qty")
@@ -146,13 +152,14 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.Property<int>("StockAfter")
                         .HasColumnType("int");
 
-                    b.Property<int>("StockBefore")
-                        .HasColumnType("int");
-
                     b.Property<string>("StoreType")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("ProductGroupId");
 
                     b.HasIndex("ProductId");
 
@@ -224,6 +231,16 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
 
             modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.Store", b =>
                 {
+                    b.HasOne("NetCoreAPI_Template_v3_with_auth.Models.User", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NetCoreAPI_Template_v3_with_auth.Models.ProductGroup", "ProductGroup")
+                        .WithMany()
+                        .HasForeignKey("ProductGroupId");
+
                     b.HasOne("NetCoreAPI_Template_v3_with_auth.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")

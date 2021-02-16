@@ -36,7 +36,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			try
 			{
 				var product = await _dbContext.Products
-					.Include(x=>x.CreatedBy)
+					.Include(x => x.CreatedBy)
 					.FirstOrDefaultAsync(x => x.Name == newProduct.ProductName);
 				if (!(product is null))
 				{
@@ -80,7 +80,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			try
 			{
 				var productGroup = await _dbContext.ProductGroups
-					.Include(x=>x.CreatedBy)
+					.Include(x => x.CreatedBy)
 					.FirstOrDefaultAsync(x => x.Name == newProductGroup.ProductGroupName);
 				if (!(productGroup is null))
 				{
@@ -153,7 +153,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			try
 			{
 				var productGroups = await _dbContext.ProductGroups
-					.Include(x => x.CreatedBy).ToListAsync();
+					.Include(x => x.CreatedBy)
+					.Include(x => x.Products)
+					.ToListAsync();
 
 				//mapper Dto and return
 				var productGroup_return = _mapper.Map<List<GetProductGroupDto>>(productGroups);
@@ -240,7 +242,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			{
 				var product = await _dbContext.Products
 					.Include(x => x.ProductGroup)
-					.Include(x=>x.CreatedBy)
+					.Include(x => x.CreatedBy)
 					.FirstOrDefaultAsync(x => x.Id == ProductId);
 				//check employee
 				if (product is null)
@@ -489,7 +491,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			{
 				var productgroup = await _dbContext.ProductGroups
 					.Include(x => x.Products)
-					.Include(x=>x.CreatedBy)
+					.Include(x => x.CreatedBy)
 					.FirstOrDefaultAsync(x => x.Id == ProductGroupId);
 
 				//check Product Group
@@ -520,9 +522,89 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			throw new NotImplementedException();
 		}
 
-		public Task<ServiceResponse<GetStockDto>> AddStock(AddstockDto newStock)
+		public async Task<ServiceResponse<GetStockDto>> AddStock(AddstockDto newStock)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				var product_onhand = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == newStock.ProductId);
+				if (product_onhand.StockCount < newStock.Qty)
+				{
+					_log.LogError($"Product onHand < {newStock.Qty} not found");
+					return ResponseResult.Failure<GetStockDto>($"Product onHand < {newStock.Qty}");
+				}
+
+				var stock = new Store
+				{
+					ProductId = newStock.ProductId,
+					Qty = newStock.Qty,
+					ProductStockCount = product_onhand.StockCount,
+					StockAfter = product_onhand.StockCount - newStock.Qty,
+					CreatedById = Guid.Parse(GetUserId()),
+					CreatedDate = Now(),
+					StoreType = newStock.StoreType,
+					Remark = newStock.Remark
+				};
+
+				_dbContext.Stores.Add(stock);
+				await _dbContext.SaveChangesAsync();
+
+				var stock_retuen = _mapper.Map<GetStockDto>(stock);
+
+				_log.LogInformation($"Add Stores Success");
+				return ResponseResult.Success(stock_retuen, "Success");
+			}
+			catch (Exception ex)
+			{
+
+				_log.LogError(ex.Message);
+				return ResponseResult.Failure<GetStockDto>(ex.Message);
+			}
+		}
+
+		public async Task<ServiceResponse<List<GetStockDto>>> GetStoreFilter(StoreFilterDto StoreFilter)
+		{
+			var store_queryable = _dbContext.Stores
+				.Include(x => x.Product)
+				.ThenInclude(x=>x.ProductGroup)
+				.Include(x => x.CreatedBy)
+				.AsQueryable();
+
+			//Filter
+			if (!string.IsNullOrWhiteSpace(StoreFilter.ProductName))
+			{
+				store_queryable = store_queryable.Where(x => x.Product.Name.Contains(StoreFilter.ProductName));
+			}
+
+			// if (!string.IsNullOrWhiteSpace(EmployeeFilter.EmployeeDepartment))
+			// {
+			//     queryable = queryable.Where(x => x.Department.Contains(EmployeeFilter.EmployeeDepartment));
+			// }
+
+			//Ordering
+			if (!string.IsNullOrWhiteSpace(StoreFilter.OrderingField))
+			{
+				try
+				{
+					_log.LogInformation($"Order by Success");
+					store_queryable = store_queryable.OrderBy($"{StoreFilter.OrderingField} {(StoreFilter.AscendingOrder ? "ascending" : "descending")}");
+				}
+				catch
+				{
+					return ResponseResultWithPagination.Failure<List<GetStockDto>>($"Could not order by field: {StoreFilter.OrderingField}");
+				}
+			}
+
+			var paginationResult = await _httpContext.HttpContext
+				.InsertPaginationParametersInResponse(store_queryable, StoreFilter.RecordsPerPage, StoreFilter.Page);
+
+
+
+			var StoreFilter_Paginate = await store_queryable.Paginate(StoreFilter).ToListAsync();
+			_log.LogInformation($"Store Filter Success");
+
+			var StoreFilter_return = _mapper.Map<List<GetStockDto>>(StoreFilter_Paginate);
+
+			return ResponseResultWithPagination.Success(StoreFilter_return, paginationResult);
 		}
 	}
 }

@@ -15,8 +15,7 @@ namespace NetCoreAPI_Template_v3_with_auth
         public AutoMapperProfile()
         {
             CreateMap<User, UserDto>();
-            CreateMap<Role, RoleDto>()
-                .ForMember(x => x.RoleName, x => x.MapFrom(x => x.Name));
+            CreateMap<Role, RoleDto>().ForMember(x => x.RoleName, x => x.MapFrom(x => x.Name));
             CreateMap<RoleDtoAdd, Role>()
                 .ForMember(x => x.Name, x => x.MapFrom(x => x.RoleName)); ;
             CreateMap<UserRole, UserRoleDto>();
