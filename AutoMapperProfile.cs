@@ -10,19 +10,22 @@ using System.Threading.Tasks;
 
 namespace NetCoreAPI_Template_v3_with_auth
 {
-    public class AutoMapperProfile : Profile
-    {
-        public AutoMapperProfile()
-        {
-            CreateMap<User, UserDto>();
-            CreateMap<Role, RoleDto>().ForMember(x => x.RoleName, x => x.MapFrom(x => x.Name));
-            CreateMap<RoleDtoAdd, Role>()
-                .ForMember(x => x.Name, x => x.MapFrom(x => x.RoleName)); ;
-            CreateMap<UserRole, UserRoleDto>();
-            CreateMap<Product, GetProductDto>();
-            CreateMap<ProductGroup, GetProductGroupDto>();
-            CreateMap<Store,GetStockDto>();
-            CreateMap<Orders,GetOrderDto>();
-        }
-    }
+	public class AutoMapperProfile : Profile
+	{
+		public AutoMapperProfile()
+		{
+			CreateMap<User, UserDto>();
+			CreateMap<Role, RoleDto>().ForMember(x => x.RoleName, x => x.MapFrom(x => x.Name));
+			CreateMap<RoleDtoAdd, Role>()
+				.ForMember(x => x.Name, x => x.MapFrom(x => x.RoleName)); ;
+			CreateMap<UserRole, UserRoleDto>();
+			CreateMap<Product, GetProductDto>();
+            CreateMap<Product, GetStockDto>();
+            CreateMap<Product, FilterProductNameDto>().ForMember(x=>x.ProductGroup,x=>x.MapFrom(x=>x.ProductGroup));
+			CreateMap<ProductGroup, GetProductGroupDto>();
+			CreateMap<ProductGroup, FilterProductGroupNameDto>();
+			CreateMap<Store, GetStockDto>();
+			CreateMap<Orders, GetOrderDto>();
+		}
+	}
 }

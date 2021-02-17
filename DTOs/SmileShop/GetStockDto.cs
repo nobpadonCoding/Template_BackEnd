@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using NetCoreAPI_Template_v3_with_auth.Models;
 
 namespace NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop
 {
@@ -8,10 +7,8 @@ namespace NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop
 	{
 		public int Id { get; set; }
 		public int ProductId { get; set; }
-		public string ProductName { get; set; }
 		public int ProductStockCount { get; set; }
-		public int ProductGroupId { get; set; }
-		public string ProductGroupName { get; set; }
+		public FilterProductNameDto Product { get; set; }
 		public string CreatedByUsername { get; set; }
 		public DateTime CreatedDate { get; set; }
 		public int Qty { get; set; }

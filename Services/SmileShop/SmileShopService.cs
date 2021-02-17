@@ -564,9 +564,8 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 		public async Task<ServiceResponse<List<GetStockDto>>> GetStoreFilter(StoreFilterDto StoreFilter)
 		{
 			var store_queryable = _dbContext.Stores
-				.Include(x => x.Product)
-				.ThenInclude(x=>x.ProductGroup)
 				.Include(x => x.CreatedBy)
+				.Include(x => x.Product).ThenInclude(x=>x.ProductGroup)
 				.AsQueryable();
 
 			//Filter
