@@ -7,8 +7,10 @@ namespace NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop
 		public int ProductId { get; set; }
 		// public int ProductGroupId { get; set; }
 		// public int AmountQty { get; set; }
-		public int Qty { get; set; }
-		public string StoreType { get; set; }
+		public int Quantity { get; set; }
+		public string StoreTypeId { get; set; }
+		public int StockAfter { get; set; }
+		public int ProductStockCount { get; set; }
 
 		[StringLength(100)]
 		public string Remark { get; set; }

@@ -527,21 +527,35 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			try
 			{
 				var product_onhand = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == newStock.ProductId);
-				if (product_onhand.StockCount < newStock.Qty)
+
+				// cut stock
+				if (newStock.StoreTypeId == "1")
 				{
-					_log.LogError($"Product onHand < {newStock.Qty} not found");
-					return ResponseResult.Failure<GetStockDto>($"Product onHand < {newStock.Qty}");
+					product_onhand.StockCount = product_onhand.StockCount + newStock.Quantity;
 				}
+				else
+				{
+					if (product_onhand.StockCount < newStock.Quantity)
+					{
+						_log.LogError($"Product onHand < {newStock.Quantity} not found");
+						return ResponseResult.Failure<GetStockDto>($"Product onHand < {newStock.Quantity}");
+					}
+					product_onhand.StockCount = product_onhand.StockCount - newStock.Quantity;
+				}
+
+				//update database
+				_dbContext.Products.Update(product_onhand);
+				_log.LogInformation($"cut stock Success");
 
 				var stock = new Store
 				{
 					ProductId = newStock.ProductId,
-					Qty = newStock.Qty,
-					ProductStockCount = product_onhand.StockCount,
-					StockAfter = product_onhand.StockCount - newStock.Qty,
+					Qty = newStock.Quantity,
+					ProductStockCount = newStock.ProductStockCount,
+					StockAfter = newStock.StockAfter,
 					CreatedById = Guid.Parse(GetUserId()),
 					CreatedDate = Now(),
-					StoreType = newStock.StoreType,
+					StoreType = newStock.StoreTypeId,
 					Remark = newStock.Remark
 				};
 
@@ -565,7 +579,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 		{
 			var store_queryable = _dbContext.Stores
 				.Include(x => x.CreatedBy)
-				.Include(x => x.Product).ThenInclude(x=>x.ProductGroup)
+				.Include(x => x.Product).ThenInclude(x => x.ProductGroup)
 				.AsQueryable();
 
 			//Filter
