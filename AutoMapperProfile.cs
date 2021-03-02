@@ -21,7 +21,7 @@ namespace NetCoreAPI_Template_v3_with_auth
 			CreateMap<UserRole, UserRoleDto>();
 			CreateMap<Product, GetProductDto>();
             CreateMap<Product, GetStockDto>();
-            CreateMap<Product, FilterProductNameDto>().ForMember(x=>x.ProductGroup,x=>x.MapFrom(x=>x.ProductGroup));
+            CreateMap<Product, FilterProductNameDto>();
 			CreateMap<ProductGroup, GetProductGroupDto>();
 			CreateMap<ProductGroup, FilterProductGroupNameDto>();
 			CreateMap<Store, GetStockDto>();

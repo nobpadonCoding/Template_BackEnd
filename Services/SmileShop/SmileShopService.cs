@@ -112,7 +112,8 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 		public async Task<ServiceResponse<List<Product>>> GetProductFilter(ProductFilterDto ProductFilter)
 		{
 			var products_queryable = _dbContext.Products
-				.Include(x => x.ProductGroup).AsQueryable();
+				.Include(x => x.ProductGroup)
+				.Include(x=>x.CreatedBy).AsQueryable();
 
 			//Filter
 			if (!string.IsNullOrWhiteSpace(ProductFilter.ProductName))
@@ -535,7 +536,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 				}
 				else
 				{
-					if (product_onhand.StockCount < newStock.Quantity)
+					if (product_onhand.StockCount < newStock.Quantity)//check on hand
 					{
 						_log.LogError($"Product onHand < {newStock.Quantity} not found");
 						return ResponseResult.Failure<GetStockDto>($"Product onHand < {newStock.Quantity}");
@@ -583,9 +584,14 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 				.AsQueryable();
 
 			//Filter
-			if (!string.IsNullOrWhiteSpace(StoreFilter.ProductName))
+			// if (!string.IsNullOrWhiteSpace(StoreFilter.ProductName))
+			// {
+			// 	store_queryable = store_queryable.Where(x => x.Product.Name.Contains(StoreFilter.ProductName));
+			// }
+
+			if (!string.IsNullOrWhiteSpace(StoreFilter.StoreType))
 			{
-				store_queryable = store_queryable.Where(x => x.Product.Name.Contains(StoreFilter.ProductName));
+				store_queryable = store_queryable.Where(x => x.StoreType.Contains(StoreFilter.StoreType));
 			}
 
 			// if (!string.IsNullOrWhiteSpace(EmployeeFilter.EmployeeDepartment))
