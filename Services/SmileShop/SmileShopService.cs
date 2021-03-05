@@ -60,7 +60,6 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 				};
 
 				_dbContext.Products.Add(product_new);
-				await _dbContext.SaveChangesAsync();
 
 				var product_retuen = _mapper.Map<GetProductDto>(product_new);
 				_log.LogInformation($"Add Product Success");
