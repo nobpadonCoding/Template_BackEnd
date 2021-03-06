@@ -12,7 +12,7 @@ namespace NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop
         public double Discount { get; set; }
         public double Total { get; set; }
         public double TotalAmount { get; set; }
-        public int ItemCount { get; set; }
+        public int Quantity { get; set; }
         public DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public List<Product> Product { get; set; }

@@ -270,81 +270,85 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			throw new NotImplementedException();
 		}
 
-		// public async Task<ServiceResponse<GetOrderDto>> AddOrder(List<AddOrderDto> newOrder)
-		// {
-		// 	try
-		// 	{
-		// 		foreach (var item in newOrder)
-		// 		{
-		// 			var product = _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
-		// 			if (!(product is null))
-		// 			{
-		// 				if (product.Result.StockCount <= 0)
-		// 				{
-		// 					_log.LogError($"{product.Result.Name} StockCount < 0");
-		// 					return ResponseResult.Failure<GetOrderDto>($"{product.Result.Name} StockCount < 0");
-		// 				}
-		// 				else
-		// 				{
-		// 					var xxx = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
-		// 					var StockCount = product.Result.StockCount - 1;
-		// 					xxx.Name = product.Result.Name;
-		// 					xxx.Price = product.Result.Price;
-		// 					xxx.StockCount = StockCount;
-		// 					xxx.ProductGroupId = xxx.ProductGroupId;
-		// 					// StockCount_return.Append(StockCount);
-		// 					_dbContext.Products.Update(xxx);
-		// 				}
-		// 			}
-		// 		}
-		// 		// await _dbContext.SaveChangesAsync();
+		public async Task<ServiceResponse<GetOrderDto>> AddOrder(List<AddOrderDto> newOrder)
+		{
+			try
+			{
+				//loob check product
+				foreach (var item in newOrder)
+				{
+					var product = _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
+					if (!(product is null))
+					{
+						//check QTY product ต้อง > 0 
+						if (product.Result.StockCount <= 0)
+						{
+							_log.LogError($"{product.Result.Name} StockCount < 0");
+							return ResponseResult.Failure<GetOrderDto>($"{product.Result.Name} StockCount < 0");
+						}
+						else
+						{
+							var xxx = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
+							//ตัด stock
+							var StockCount = product.Result.StockCount - 1;
+							xxx.Name = product.Result.Name;
+							xxx.Price = product.Result.Price;
+							xxx.StockCount = StockCount;
+							xxx.ProductGroupId = xxx.ProductGroupId;
+							// StockCount_return.Append(StockCount);
+							_dbContext.Products.Update(xxx);
+						}
+					}
+				}
+				// await _dbContext.SaveChangesAsync();
 
-		// 		var runNo = new OrderNo
-		// 		{
-		// 			CreatedDate = Now()
-		// 		};
+				var runNo = new OrderNo
+				{
+					CreatedBy = Guid.Parse(GetUserId()),
+					CreatedDate = Now()
+				};
 
-		// 		_dbContext.OrderNos.Add(runNo);
-		// 		await _dbContext.SaveChangesAsync();
+				_dbContext.OrderNo.Add(runNo);
+				await _dbContext.SaveChangesAsync();
 
-		// 		var order_ch = _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderNoId == runNo.Id);
-		// 		if (order_ch is null)
-		// 		{
-		// 			_log.LogError($"Order id {runNo.Id} duplicate");
-		// 			return ResponseResult.Failure<GetOrderDto>($"Order id {runNo.Id} duplicate");
-		// 		}
+				var order_ch = _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderNoId == runNo.Id);
+				if (order_ch is null)
+				{
+					_log.LogError($"Order id {runNo.Id} duplicate");
+					return ResponseResult.Failure<GetOrderDto>($"Order id {runNo.Id} duplicate");
+				}
 
 
-		// 		foreach (var item in newOrder)
-		// 		{
-		// 			var order_new = new Orders
-		// 			{
-		// 				OrderNoId = runNo.Id,
-		// 				ProductId = item.ProductId,
-		// 				ProductPrice = item.ProductPrice,
-		// 				Discount = item.ProductDiscount,
-		// 				CreatedBy = Guid.Parse(GetUserId()),
-		// 				ItemCount = newOrder.Count(),
-		// 			};
+				foreach (var item in newOrder)
+				{
+					var order_new = new Orders
+					{
+						OrderNoId = runNo.Id,
+						ProductId = item.ProductId,
+						ProductPrice = item.ProductPrice,
+						Discount = item.ProductDiscount,
+						CreatedById = Guid.Parse(GetUserId()),
+						Quantity = item.Quantity,
+					};
 
-		// 			_dbContext.Orders.Add(order_new);
-		// 			await _dbContext.SaveChangesAsync();
-		// 		}
+					_dbContext.Orders.Add(order_new);
+					await _dbContext.SaveChangesAsync();
+				}
 
-		// 		var get_order_retuen = await _dbContext.Orders.Where(x => x.OrderNoId == runNo.Id).FirstOrDefaultAsync();
-		// 		// var idorder = _dbContext.OrderNos.Where(x=>x.Id==runNo.Id).ToListAsync();
+				var get_order_retuen = await _dbContext.Orders.Where(x => x.OrderNoId == runNo.Id).FirstOrDefaultAsync();
+				// var idorder = _dbContext.OrderNos.Where(x=>x.Id==runNo.Id).ToListAsync();
 
-		// 		var order_retuen = _mapper.Map<GetOrderDto>(get_order_retuen);
-		// 		_log.LogInformation($"Add Order Success");
-		// 		return ResponseResult.Success<GetOrderDto>(order_retuen, "Success");
-		// 	}
-		// 	catch (Exception ex)
-		// 	{
+				var order_retuen = _mapper.Map<GetOrderDto>(get_order_retuen);
+				_log.LogInformation($"Add Order Success");
+				return ResponseResult.Success<GetOrderDto>(order_retuen, "Success");
+			}
+			catch (Exception ex)
+			{
 
-		// 		_log.LogError(ex.Message);
-		// 		return ResponseResult.Failure<GetOrderDto>(ex.Message);
-		// 	}
-		// }
+				_log.LogError(ex.Message);
+				return ResponseResult.Failure<GetOrderDto>(ex.Message);
+			}
+		}
 
 		public async Task<ServiceResponse<List<ProductGroup>>> GetProducGrouptFilter(ProductGroupFilterDto ProductGroupFilter)
 		{
