@@ -112,7 +112,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 		{
 			var products_queryable = _dbContext.Products
 				.Include(x => x.ProductGroup)
-				.Include(x=>x.CreatedBy).AsQueryable();
+				.Include(x => x.CreatedBy).AsQueryable();
 
 			//Filter
 			if (!string.IsNullOrWhiteSpace(ProductFilter.ProductName))
@@ -280,7 +280,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 					var product = _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
 					if (!(product is null))
 					{
-						//check QTY product ต้อง > 0 
+						//check QTY product ต้อง > 0
 						if (product.Result.StockCount <= 0)
 						{
 							_log.LogError($"{product.Result.Name} StockCount < 0");
@@ -288,15 +288,22 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 						}
 						else
 						{
-							var xxx = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
-							//ตัด stock
-							var StockCount = product.Result.StockCount - 1;
-							xxx.Name = product.Result.Name;
-							xxx.Price = product.Result.Price;
-							xxx.StockCount = StockCount;
-							xxx.ProductGroupId = xxx.ProductGroupId;
-							// StockCount_return.Append(StockCount);
-							_dbContext.Products.Update(xxx);
+							if (product.Result.StockCount >= item.ProductQuantity)
+							{
+								var xxx = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
+								//ตัด stock
+								var StockCount = product.Result.StockCount - item.ProductQuantity;
+								xxx.Name = product.Result.Name;
+								xxx.Price = product.Result.Price;
+								xxx.StockCount = StockCount;
+								xxx.ProductGroupId = xxx.ProductGroupId;
+								_dbContext.Products.Update(xxx);
+							}
+							else
+							{
+								_log.LogError($"{product.Result.Name} StockCount < Quantity");
+								return ResponseResult.Failure<GetOrderDto>($"{product.Result.Name} StockCount < 0");
+							}
 						}
 					}
 				}
@@ -327,20 +334,24 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 						ProductId = item.ProductId,
 						ProductPrice = item.ProductPrice,
 						Discount = item.ProductDiscount,
+						Total = item.ProductPrice * item.ProductQuantity,
+						TotalAmount = item.ProductPrice * item.ProductQuantity - item.ProductDiscount,
 						CreatedById = Guid.Parse(GetUserId()),
-						Quantity = item.Quantity,
+						Quantity = item.ProductQuantity,
+						CreatedDate = Now()
 					};
 
 					_dbContext.Orders.Add(order_new);
 					await _dbContext.SaveChangesAsync();
 				}
 
-				var get_order_retuen = await _dbContext.Orders.Where(x => x.OrderNoId == runNo.Id).FirstOrDefaultAsync();
-				// var idorder = _dbContext.OrderNos.Where(x=>x.Id==runNo.Id).ToListAsync();
+				var get_order_return = await _dbContext.Orders.Where(x => x.OrderNoId == runNo.Id).FirstOrDefaultAsync();
 
-				var order_retuen = _mapper.Map<GetOrderDto>(get_order_retuen);
+				// var get_order_return = runNo.Id;
+
+				// var order_return = _mapper.Map<GetOrderDto>(get_order_return);
 				_log.LogInformation($"Add Order Success");
-				return ResponseResult.Success<GetOrderDto>(order_retuen, "Success");
+				return ResponseResult.Success<GetOrderDto>(null, "Success");
 			}
 			catch (Exception ex)
 			{
