@@ -306,8 +306,12 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 							}
 						}
 					}
+					else
+					{
+						_log.LogError($"{item.ProductId} Product Not found");
+						return ResponseResult.Failure<GetOrderDto>($"{item.ProductId} Product Not found");
+					}
 				}
-				// await _dbContext.SaveChangesAsync();
 
 				var runNo = new OrderNo
 				{
@@ -349,11 +353,10 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 
 				var get_order_return = await _dbContext.Orders.Where(x => x.OrderNoId == runNo.Id).FirstOrDefaultAsync();
 
-				// var get_order_return = runNo.Id;
 
-				// var order_return = _mapper.Map<GetOrderDto>(get_order_return);
+				var order_return = _mapper.Map<GetOrderDto>(get_order_return);
 				_log.LogInformation($"Add Order Success");
-				return ResponseResult.Success<GetOrderDto>(null, "Success");
+				return ResponseResult.Success<GetOrderDto>(order_return, "Success");
 			}
 			catch (Exception ex)
 			{
