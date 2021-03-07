@@ -334,8 +334,10 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 						ProductId = item.ProductId,
 						ProductPrice = item.ProductPrice,
 						Discount = item.ProductDiscount,
-						Total = item.ProductPrice * item.ProductQuantity,
-						TotalAmount = item.ProductPrice * item.ProductQuantity - item.ProductDiscount,
+						// Total = item.ProductPrice * item.ProductQuantity,
+						Total = item.Total,
+						// TotalAmount = item.ProductPrice * item.ProductQuantity - item.ProductDiscount,
+						TotalAmount = item.TotalAmount,
 						CreatedById = Guid.Parse(GetUserId()),
 						Quantity = item.ProductQuantity,
 						CreatedDate = Now()
