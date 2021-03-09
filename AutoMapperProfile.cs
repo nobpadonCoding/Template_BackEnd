@@ -17,7 +17,7 @@ namespace NetCoreAPI_Template_v3_with_auth
 			CreateMap<User, UserDto>();
 			CreateMap<Role, RoleDto>().ForMember(x => x.RoleName, x => x.MapFrom(x => x.Name));
 			CreateMap<RoleDtoAdd, Role>()
-				.ForMember(x => x.Name, x => x.MapFrom(x => x.RoleName)); ;
+				.ForMember(x => x.Name, x => x.MapFrom(x => x.RoleName));
 			CreateMap<UserRole, UserRoleDto>();
 			CreateMap<Product, GetProductDto>();
             CreateMap<Product, GetStockDto>();
@@ -25,7 +25,13 @@ namespace NetCoreAPI_Template_v3_with_auth
 			CreateMap<ProductGroup, GetProductGroupDto>();
 			CreateMap<ProductGroup, FilterProductGroupNameDto>();
 			CreateMap<Store, GetStockDto>();
-			CreateMap<Orders, GetOrderDto>();
+			CreateMap<Orders, GetOrderDto>()
+				.ForMember(x => x.Total, x => x.MapFrom(x => x.OrderNo.Total))
+				.ForMember(x => x.TotalAmount, x => x.MapFrom(x => x.OrderNo.TotalAmount))
+				.ForMember(x => x.Discount, x => x.MapFrom(x => x.OrderNo.Discount));
+				// .ForMember(x => x.OrderDetail, x => x.MapFrom(x => x.Product));
+			CreateMap<Product, GetOrderDto>();
+			CreateMap<Product, GetOrderDetailDto>();
 			CreateMap<OrderNo, GetOrderFilterDto>();
 		}
 	}

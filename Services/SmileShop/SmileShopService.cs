@@ -266,12 +266,37 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			}
 		}
 
-		public Task<ServiceResponse<List<GetOrderDto>>> GetOrder()
+		public async Task<ServiceResponse<List<GetOrderDto>>> GetOrder(int orderNumber)
 		{
-			throw new NotImplementedException();
+			try
+			{
+
+				var order = await _dbContext.Orders
+				.Include(x => x.Product)
+				.Include(x=>x.OrderNo)
+				.Where(x => x.OrderNoId == orderNumber).ToListAsync();
+				//check employee
+				if (order is null)
+				{
+					_log.LogError($"Order number {orderNumber} not found");
+					return ResponseResult.Failure<List<GetOrderDto>>($"Order number {orderNumber} not found");
+				}
+
+				//mapper Dto and return
+				var dto = _mapper.Map<List<GetOrderDto>>(order);
+
+				_log.LogInformation("Get Order Success");
+				return ResponseResult.Success(dto, "Success");
+			}
+			catch (Exception ex)
+			{
+
+				_log.LogError(ex.Message);
+				return ResponseResult.Failure<List<GetOrderDto>>(ex.Message);
+			}
 		}
 
-		public async Task<ServiceResponse<GetOrderDto>> AddOrder(AddOrderDto newOrder)
+		public async Task<ServiceResponse<GetOrderNoDto>> AddOrder(AddOrderDto newOrder)
 		{
 			try
 			{
@@ -290,7 +315,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 						if (product.Result.StockCount <= 0)
 						{
 							_log.LogError($"{product.Result.Name} StockCount < 0");
-							return ResponseResult.Failure<GetOrderDto>($"{product.Result.Name} StockCount < 0");
+							return ResponseResult.Failure<GetOrderNoDto>($"{product.Result.Name} StockCount < 0");
 						}
 						else
 						{
@@ -309,14 +334,14 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 							else
 							{
 								_log.LogError($"{product.Result.Name} StockCount < Quantity");
-								return ResponseResult.Failure<GetOrderDto>($"{product.Result.Name} StockCount < {item.ProductQuantity}");
+								return ResponseResult.Failure<GetOrderNoDto>($"{product.Result.Name} StockCount < {item.ProductQuantity}");
 							}
 						}
 					}
 					else
 					{
 						_log.LogError($"{item.ProductId} Product Not found");
-						return ResponseResult.Failure<GetOrderDto>($"{item.ProductId} Product Not found");
+						return ResponseResult.Failure<GetOrderNoDto>($"{item.ProductId} Product Not found");
 					}
 				}
 
@@ -365,15 +390,15 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 				var get_order_return = await _dbContext.Orders.Where(x => x.OrderNoId == runNo.Id).FirstOrDefaultAsync();
 
 
-				var order_return = _mapper.Map<GetOrderDto>(get_order_return);
+				var order_return = _mapper.Map<GetOrderNoDto>(get_order_return);
 				_log.LogInformation($"Add Order Success");
-				return ResponseResult.Success<GetOrderDto>(order_return, "Success");
+				return ResponseResult.Success<GetOrderNoDto>(order_return, "Success");
 			}
 			catch (Exception ex)
 			{
 
 				_log.LogError(ex.Message);
-				return ResponseResult.Failure<GetOrderDto>(ex.Message);
+				return ResponseResult.Failure<GetOrderNoDto>(ex.Message);
 			}
 		}
 
@@ -663,7 +688,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 
 			if (!string.IsNullOrWhiteSpace(OrderFilter.OrderNumber))
 			{
-				order_queryable = order_queryable.Where(x=>x.Id.ToString().Contains(OrderFilter.OrderNumber));
+				order_queryable = order_queryable.Where(x => x.Id.ToString().Contains(OrderFilter.OrderNumber));
 			}
 
 			//Ordering
