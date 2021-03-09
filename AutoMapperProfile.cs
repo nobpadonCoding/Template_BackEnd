@@ -31,7 +31,7 @@ namespace NetCoreAPI_Template_v3_with_auth
 				.ForMember(x => x.Discount, x => x.MapFrom(x => x.OrderNo.Discount));
 				// .ForMember(x => x.OrderDetail, x => x.MapFrom(x => x.Product));
 			CreateMap<Product, GetOrderDto>();
-			CreateMap<Product, GetOrderDetailDto>();
+			CreateMap<Product, GetOrderProductDetailDto>();
 			CreateMap<OrderNo, GetOrderFilterDto>();
 		}
 	}
