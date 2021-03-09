@@ -114,7 +114,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
         }
 
         [HttpPost("Order")]
-        public async Task<IActionResult> AddOrder(List<AddOrderDto> newOrder)
+        public async Task<IActionResult> AddOrder(AddOrderDto newOrder)
         {
             return Ok(await _smileService.AddOrder(newOrder));
         }

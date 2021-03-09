@@ -60,6 +60,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 				};
 
 				_dbContext.Products.Add(product_new);
+				await _dbContext.SaveChangesAsync();
 
 				var product_retuen = _mapper.Map<GetProductDto>(product_new);
 				_log.LogInformation($"Add Product Success");
@@ -270,15 +271,16 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			throw new NotImplementedException();
 		}
 
-		public async Task<ServiceResponse<GetOrderDto>> AddOrder(List<AddOrderDto> newOrder)
+		public async Task<ServiceResponse<GetOrderDto>> AddOrder(AddOrderDto newOrder)
 		{
 			try
 			{
 				var sumProductQuantity = 0;
 				//loob check product
-				foreach (var item in newOrder)
+				foreach (var item in newOrder.OrderDetail)
 				{
 					var product = _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
+					//sum total
 					sumProductQuantity = sumProductQuantity + item.ProductQuantity;
 
 					//check product มีหรือเปล่า
@@ -307,7 +309,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 							else
 							{
 								_log.LogError($"{product.Result.Name} StockCount < Quantity");
-								return ResponseResult.Failure<GetOrderDto>($"{product.Result.Name} StockCount < 0");
+								return ResponseResult.Failure<GetOrderDto>($"{product.Result.Name} StockCount < {item.ProductQuantity}");
 							}
 						}
 					}
@@ -323,9 +325,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 				{
 					CreatedBy = Guid.Parse(GetUserId()),
 					CreatedDate = Now(),
-					Discount = newOrder[0].ProductDiscount,
-					Total = newOrder[0].Total,
-					TotalAmount = newOrder[0].TotalAmount,
+					Discount = newOrder.Discount,
+					Total = newOrder.Total,
+					TotalAmount = newOrder.TotalAmount,
 					ProductQuantity = sumProductQuantity
 				};
 
@@ -341,9 +343,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 				// }
 
 
-				foreach (var item in newOrder)
+				foreach (var item in newOrder.OrderDetail)
 				{
-					var order_new = new Orders
+					var orders = new Orders
 					{
 						OrderNoId = runNo.Id,
 						ProductId = item.ProductId,
@@ -354,7 +356,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 						CreatedDate = Now()
 					};
 
-					_dbContext.Orders.Add(order_new);
+					_dbContext.Orders.AddRange(orders);
 
 				}
 
