@@ -119,5 +119,11 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
             return Ok(await _smileService.AddOrder(newOrder));
         }
 
+        [HttpGet("Order/filter")]
+        public async Task<IActionResult> GetOrderFilter([FromQuery] OrderFilterDto OrderFilter)
+        {
+            return Ok(await _smileService.GetOrderFilter(OrderFilter));
+        }
+
     }
 }

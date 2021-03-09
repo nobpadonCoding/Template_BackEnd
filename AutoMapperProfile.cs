@@ -26,6 +26,7 @@ namespace NetCoreAPI_Template_v3_with_auth
 			CreateMap<ProductGroup, FilterProductGroupNameDto>();
 			CreateMap<Store, GetStockDto>();
 			CreateMap<Orders, GetOrderDto>();
+			CreateMap<OrderNo, GetOrderFilterDto>();
 		}
 	}
 }

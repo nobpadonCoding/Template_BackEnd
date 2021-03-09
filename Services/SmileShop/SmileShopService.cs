@@ -274,10 +274,14 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 		{
 			try
 			{
+				var sumProductQuantity = 0;
 				//loob check product
 				foreach (var item in newOrder)
 				{
 					var product = _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
+					sumProductQuantity = sumProductQuantity + item.ProductQuantity;
+
+					//check product มีหรือเปล่า
 					if (!(product is null))
 					{
 						//check QTY product ต้อง > 0
@@ -288,6 +292,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 						}
 						else
 						{
+							//check StockCount ต้องมากกว่า Quantity
 							if (product.Result.StockCount >= item.ProductQuantity)
 							{
 								var xxx = await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == item.ProductId);
@@ -313,21 +318,27 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 					}
 				}
 
+				//create Order id
 				var runNo = new OrderNo
 				{
 					CreatedBy = Guid.Parse(GetUserId()),
-					CreatedDate = Now()
+					CreatedDate = Now(),
+					Discount = newOrder[0].ProductDiscount,
+					Total = newOrder[0].Total,
+					TotalAmount = newOrder[0].TotalAmount,
+					ProductQuantity = sumProductQuantity
 				};
 
 				_dbContext.OrderNo.Add(runNo);
 				await _dbContext.SaveChangesAsync();
 
-				var order_ch = _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderNoId == runNo.Id);
-				if (order_ch is null)
-				{
-					_log.LogError($"Order id {runNo.Id} duplicate");
-					return ResponseResult.Failure<GetOrderDto>($"Order id {runNo.Id} duplicate");
-				}
+				//check order duplicate
+				// var order_ch = _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderNoId == runNo.Id);
+				// if (order_ch is null)
+				// {
+				// 	_log.LogError($"Order id {runNo.Id} duplicate");
+				// 	return ResponseResult.Failure<GetOrderDto>($"Order id {runNo.Id} duplicate");
+				// }
 
 
 				foreach (var item in newOrder)
@@ -337,19 +348,17 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 						OrderNoId = runNo.Id,
 						ProductId = item.ProductId,
 						ProductPrice = item.ProductPrice,
-						Discount = item.ProductDiscount,
-						// Total = item.ProductPrice * item.ProductQuantity,
-						Total = item.Total,
-						// TotalAmount = item.ProductPrice * item.ProductQuantity - item.ProductDiscount,
-						TotalAmount = item.TotalAmount,
+
 						CreatedById = Guid.Parse(GetUserId()),
 						Quantity = item.ProductQuantity,
 						CreatedDate = Now()
 					};
 
 					_dbContext.Orders.Add(order_new);
-					await _dbContext.SaveChangesAsync();
+
 				}
+
+				await _dbContext.SaveChangesAsync();
 
 				var get_order_return = await _dbContext.Orders.Where(x => x.OrderNoId == runNo.Id).FirstOrDefaultAsync();
 
@@ -643,6 +652,43 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			var StoreFilter_return = _mapper.Map<List<GetStockDto>>(StoreFilter_Paginate);
 
 			return ResponseResultWithPagination.Success(StoreFilter_return, paginationResult);
+		}
+
+		public async Task<ServiceResponse<List<GetOrderFilterDto>>> GetOrderFilter(OrderFilterDto OrderFilter)
+		{
+			var order_queryable = _dbContext.OrderNo
+				.AsQueryable();
+
+			if (!string.IsNullOrWhiteSpace(OrderFilter.OrderNumber))
+			{
+				order_queryable = order_queryable.Where(x=>x.Id.ToString().Contains(OrderFilter.OrderNumber));
+			}
+
+			//Ordering
+			if (!string.IsNullOrWhiteSpace(OrderFilter.OrderingField))
+			{
+				try
+				{
+					order_queryable = order_queryable.OrderBy($"{OrderFilter.OrderingField} {(OrderFilter.AscendingOrder ? "ascending" : "descending")}");
+					_log.LogInformation($"Order by Success");
+				}
+				catch
+				{
+					return ResponseResultWithPagination.Failure<List<GetOrderFilterDto>>($"Could not order by field: {OrderFilter.OrderingField}");
+				}
+			}
+
+			var paginationResult = await _httpContext.HttpContext
+				.InsertPaginationParametersInResponse(order_queryable, OrderFilter.RecordsPerPage, OrderFilter.Page);
+
+
+
+			var OrderFilter_Paginate = await order_queryable.Paginate(OrderFilter).ToListAsync();
+			_log.LogInformation($"Store Filter Success");
+
+			var OrderFilter_return = _mapper.Map<List<GetOrderFilterDto>>(OrderFilter_Paginate);
+
+			return ResponseResultWithPagination.Success(OrderFilter_return, paginationResult);
 		}
 	}
 }

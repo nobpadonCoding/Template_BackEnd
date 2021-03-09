@@ -24,5 +24,6 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
         Task<ServiceResponse<GetStockDto>> GetStock();
         Task<ServiceResponse<GetStockDto>> AddStock(AddstockDto newStock);
         Task<ServiceResponse<List<GetStockDto>>> GetStoreFilter(StoreFilterDto StoreFilter);
+        Task<ServiceResponse<List<GetOrderFilterDto>>> GetOrderFilter(OrderFilterDto OrderFilter);
     }
 }

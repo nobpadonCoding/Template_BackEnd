@@ -32,6 +32,18 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<double>("Discount")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ProductQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TotalAmount")
+                        .HasColumnType("float");
+
                     b.Property<bool>("status")
                         .HasColumnType("bit");
 
@@ -53,9 +65,6 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Discount")
-                        .HasColumnType("float");
-
                     b.Property<int>("OrderNoId")
                         .HasColumnType("int");
 
@@ -68,14 +77,8 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<double>("Total")
-                        .HasColumnType("float");
-
-                    b.Property<double>("TotalAmount")
-                        .HasColumnType("float");
-
-                    b.Property<string>("status")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -169,22 +172,22 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4245251d-8351-40bd-b7e8-9f11927ee646"),
+                            Id = new Guid("4ea7b7ca-dc17-4928-8284-f2bf57c84a6c"),
                             Name = "user"
                         },
                         new
                         {
-                            Id = new Guid("2ac4628b-f732-4bb9-9eb5-9ca68450c36c"),
+                            Id = new Guid("e5aeb2f2-538b-4583-9f75-8cd91915c786"),
                             Name = "Manager"
                         },
                         new
                         {
-                            Id = new Guid("b6b52a7c-ad7b-4aed-b357-c254631b4b8d"),
+                            Id = new Guid("024ed723-8bf4-4f9c-9f6f-7e76a85efa14"),
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("27257279-200d-4310-81c6-f24e4e928eac"),
+                            Id = new Guid("133e3f01-d013-4df8-85a5-149d7dab0eb5"),
                             Name = "Developer"
                         });
                 });
