@@ -20,19 +20,21 @@ namespace NetCoreAPI_Template_v3_with_auth
 				.ForMember(x => x.Name, x => x.MapFrom(x => x.RoleName));
 			CreateMap<UserRole, UserRoleDto>();
 			CreateMap<Product, GetProductDto>();
-            CreateMap<Product, GetStockDto>();
-            CreateMap<Product, FilterProductNameDto>();
+			CreateMap<Product, GetStockDto>();
+			CreateMap<Product, FilterProductNameDto>();
 			CreateMap<ProductGroup, GetProductGroupDto>();
 			CreateMap<ProductGroup, FilterProductGroupNameDto>();
 			CreateMap<Store, GetStockDto>();
-			CreateMap<Orders, GetOrderDto>()
-				.ForMember(x => x.Total, x => x.MapFrom(x => x.OrderNo.Total))
-				.ForMember(x => x.TotalAmount, x => x.MapFrom(x => x.OrderNo.TotalAmount))
-				.ForMember(x => x.Discount, x => x.MapFrom(x => x.OrderNo.Discount));
-				// .ForMember(x => x.OrderDetail, x => x.MapFrom(x => x.Product));
+			CreateMap<Orders, GetOrderDto>();
+			CreateMap<Orders, OrdersDto>();
+			CreateMap<OrdersDto, GetOrderDto>();
+			CreateMap<GetProductDetail, GetOrderDto>();
+			CreateMap<OrderNo, GetOrderDto>().ForMember(x => x.Orders, x => x.MapFrom(x => x.Orders));
+			CreateMap<Product, GetProductDetail>();
 			CreateMap<Product, GetOrderDto>();
-			CreateMap<Product, GetOrderProductDetailDto>();
+
 			CreateMap<OrderNo, GetOrderFilterDto>();
+
 		}
 	}
 }

@@ -266,24 +266,24 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			}
 		}
 
-		public async Task<ServiceResponse<List<GetOrderDto>>> GetOrder(int orderNumber)
+		public async Task<ServiceResponse<GetOrderDto>> GetOrder(int orderNumber)
 		{
 			try
 			{
 
-				var order = await _dbContext.Orders
-				.Include(x => x.Product)
-				.Include(x=>x.OrderNo)
-				.Where(x => x.OrderNoId == orderNumber).ToListAsync();
-				//check employee
+				var order = await _dbContext.OrderNo
+				.Include(x => x.Orders).ThenInclude(x=>x.Product)
+				.Where(x => x.Id == orderNumber).SingleOrDefaultAsync();
+
+				//check Order
 				if (order is null)
 				{
 					_log.LogError($"Order number {orderNumber} not found");
-					return ResponseResult.Failure<List<GetOrderDto>>($"Order number {orderNumber} not found");
+					return ResponseResult.Failure<GetOrderDto>($"Order number {orderNumber} not found");
 				}
 
 				//mapper Dto and return
-				var dto = _mapper.Map<List<GetOrderDto>>(order);
+				var dto = _mapper.Map<GetOrderDto>(order);
 
 				_log.LogInformation("Get Order Success");
 				return ResponseResult.Success(dto, "Success");
@@ -292,7 +292,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			{
 
 				_log.LogError(ex.Message);
-				return ResponseResult.Failure<List<GetOrderDto>>(ex.Message);
+				return ResponseResult.Failure<GetOrderDto>(ex.Message);
 			}
 		}
 

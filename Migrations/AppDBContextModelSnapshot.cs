@@ -172,22 +172,22 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4ea7b7ca-dc17-4928-8284-f2bf57c84a6c"),
+                            Id = new Guid("2fd8f867-5ff8-4f01-9153-90d235ef121d"),
                             Name = "user"
                         },
                         new
                         {
-                            Id = new Guid("e5aeb2f2-538b-4583-9f75-8cd91915c786"),
+                            Id = new Guid("c3ded9c7-c5ae-4327-810f-5fa536e8c2a3"),
                             Name = "Manager"
                         },
                         new
                         {
-                            Id = new Guid("024ed723-8bf4-4f9c-9f6f-7e76a85efa14"),
+                            Id = new Guid("7e53df8e-00b1-45dd-a73f-517290ab566a"),
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("133e3f01-d013-4df8-85a5-149d7dab0eb5"),
+                            Id = new Guid("50425f39-2118-4b1b-8c8a-b654ca58d24e"),
                             Name = "Developer"
                         });
                 });
@@ -281,7 +281,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                         .IsRequired();
 
                     b.HasOne("NetCoreAPI_Template_v3_with_auth.Models.OrderNo", "OrderNo")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("OrderNoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
