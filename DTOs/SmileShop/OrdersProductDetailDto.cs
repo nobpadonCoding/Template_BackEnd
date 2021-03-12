@@ -6,10 +6,12 @@ using NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop;
 
 namespace NetCoreAPI_Template_v3_with_auth.Models
 {
-	public class OrdersDto
+	public class OrdersProductDetailDto
 	{
 		public int Id { get; set; }
-		public GetProductDetail Product { get; set; }
+		public int Quantity { get; set; }
+		public int ProductId { get; set; }
+		public GetProductDetailDto Product { get; set; }
 
 	}
 }

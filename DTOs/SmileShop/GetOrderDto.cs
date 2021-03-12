@@ -9,6 +9,7 @@ namespace NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop
 		public double Total { get; set; }
 		public double TotalAmount { get; set; }
 		public double Discount { get; set; }
-		public List<OrdersDto> Orders {get;set;}
+		public int ProductQuantity { get; set; }
+		public List<OrdersProductDetailDto> Orders {get;set;}
 	}
 }

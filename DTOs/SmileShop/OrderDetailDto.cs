@@ -1,6 +1,6 @@
 namespace NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop
 {
-    public class OrderDetail
+    public class OrderDetailDto
     {
         public int ProductId { get; set; }
         public int ProductQuantity { get; set; }

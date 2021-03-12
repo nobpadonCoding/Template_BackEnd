@@ -26,11 +26,12 @@ namespace NetCoreAPI_Template_v3_with_auth
 			CreateMap<ProductGroup, FilterProductGroupNameDto>();
 			CreateMap<Store, GetStockDto>();
 			CreateMap<Orders, GetOrderDto>();
-			CreateMap<Orders, OrdersDto>();
-			CreateMap<OrdersDto, GetOrderDto>();
-			CreateMap<GetProductDetail, GetOrderDto>();
-			CreateMap<OrderNo, GetOrderDto>().ForMember(x => x.Orders, x => x.MapFrom(x => x.Orders));
-			CreateMap<Product, GetProductDetail>();
+			CreateMap<Orders, GetOrderNoDto>();
+			CreateMap<Orders, OrdersProductDetailDto>();
+			CreateMap<OrdersProductDetailDto, GetOrderDto>();
+			CreateMap<GetProductDetailDto, GetOrderDto>();
+			CreateMap<OrderNo, GetOrderDto>();
+			CreateMap<Product, GetProductDetailDto>();
 			CreateMap<Product, GetOrderDto>();
 
 			CreateMap<OrderNo, GetOrderFilterDto>();
