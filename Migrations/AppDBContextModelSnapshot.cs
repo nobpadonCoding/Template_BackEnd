@@ -26,7 +26,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid>("CreatedById")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
@@ -48,6 +48,8 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
 
                     b.ToTable("OrderNo");
                 });
@@ -172,22 +174,22 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2fd8f867-5ff8-4f01-9153-90d235ef121d"),
+                            Id = new Guid("13469d0b-273b-494b-8098-47cc378dc4a6"),
                             Name = "user"
                         },
                         new
                         {
-                            Id = new Guid("c3ded9c7-c5ae-4327-810f-5fa536e8c2a3"),
+                            Id = new Guid("a55d2b23-0d70-499c-8db4-9f6fa7ecb2d4"),
                             Name = "Manager"
                         },
                         new
                         {
-                            Id = new Guid("7e53df8e-00b1-45dd-a73f-517290ab566a"),
+                            Id = new Guid("16817eb2-5b15-42b4-80f1-b276feb71e40"),
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("50425f39-2118-4b1b-8c8a-b654ca58d24e"),
+                            Id = new Guid("1d57cbcd-0d83-4023-ae33-eb71cb3bf9df"),
                             Name = "Developer"
                         });
                 });
@@ -270,6 +272,15 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRole","auth");
+                });
+
+            modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.OrderNo", b =>
+                {
+                    b.HasOne("NetCoreAPI_Template_v3_with_auth.Models.User", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("NetCoreAPI_Template_v3_with_auth.Models.Orders", b =>

@@ -272,7 +272,8 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			{
 
 				var order = await _dbContext.OrderNo
-				.Include(x => x.Orders).ThenInclude(x=>x.Product)
+				.Include(x => x.Orders).ThenInclude(x => x.Product)
+				.Include(x=>x.CreatedBy)
 				.Where(x => x.Id == orderNumber).SingleOrDefaultAsync();
 
 				//check Order
@@ -348,7 +349,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 				//create Order id
 				var runNo = new OrderNo
 				{
-					CreatedBy = Guid.Parse(GetUserId()),
+					CreatedById = Guid.Parse(GetUserId()),
 					CreatedDate = Now(),
 					Discount = newOrder.Discount,
 					Total = newOrder.Total,
@@ -684,6 +685,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 		public async Task<ServiceResponse<List<GetOrderFilterDto>>> GetOrderFilter(OrderFilterDto OrderFilter)
 		{
 			var order_queryable = _dbContext.OrderNo
+				.Include(x => x.CreatedBy)
 				.AsQueryable();
 
 			if (!string.IsNullOrWhiteSpace(OrderFilter.OrderNumber))
