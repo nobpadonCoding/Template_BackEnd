@@ -273,7 +273,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 
 				var order = await _dbContext.OrderNo
 				.Include(x => x.Orders).ThenInclude(x => x.Product)
-				.Include(x=>x.CreatedBy)
+				.Include(x => x.CreatedBy)
 				.Where(x => x.Id == orderNumber).SingleOrDefaultAsync();
 
 				//check Order
@@ -685,12 +685,17 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 		public async Task<ServiceResponse<List<GetOrderFilterDto>>> GetOrderFilter(OrderFilterDto OrderFilter)
 		{
 			var order_queryable = _dbContext.OrderNo
-				.Include(x => x.CreatedBy)
-				.AsQueryable();
+				.Include(x => x.CreatedBy).AsQueryable();
 
 			if (!string.IsNullOrWhiteSpace(OrderFilter.OrderNumber))
 			{
 				order_queryable = order_queryable.Where(x => x.Id.ToString().Contains(OrderFilter.OrderNumber));
+			}
+
+
+			if (OrderFilter.EndDate.HasValue && OrderFilter.StartDate.HasValue)
+			{
+				order_queryable = order_queryable.Where(x => x.CreatedDate.Date >= OrderFilter.StartDate.Value.Date && x.CreatedDate.Date < OrderFilter.EndDate.Value.Date.AddDays(+1));
 			}
 
 			//Ordering
@@ -713,11 +718,12 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 
 
 			var OrderFilter_Paginate = await order_queryable.Paginate(OrderFilter).ToListAsync();
-			_log.LogInformation($"Store Filter Success");
+			_log.LogInformation($"Order Filter Success");
 
 			var OrderFilter_return = _mapper.Map<List<GetOrderFilterDto>>(OrderFilter_Paginate);
 
 			return ResponseResultWithPagination.Success(OrderFilter_return, paginationResult);
+
 		}
 	}
 }
