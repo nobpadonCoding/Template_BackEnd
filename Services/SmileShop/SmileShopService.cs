@@ -456,7 +456,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 
 				//check produck in Order
 				var productSales = await _dbContext.Orders.FirstOrDefaultAsync(x => x.Id == deleteProductId);
-				if (productSales is null)
+				if (!(productSales is null))
 				{
 					return ResponseResult.Failure<GetProductDto>($"Product id {deleteProductId} have Order");
 				}
