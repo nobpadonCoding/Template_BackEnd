@@ -458,7 +458,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 				var productSales = await _dbContext.Orders.FirstOrDefaultAsync(x => x.Id == deleteProductId);
 				if (!(productSales is null))
 				{
-					return ResponseResult.Failure<GetProductDto>($"Product id {deleteProductId} have Order");
+					return ResponseResult.Failure<GetProductDto>($"Product id {deleteProductId} have OrderNO {productSales.OrderNoId}");
 				}
 
 				//mapper Dto and return
