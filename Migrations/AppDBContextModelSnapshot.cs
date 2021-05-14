@@ -174,22 +174,22 @@ namespace NetCoreAPI_Template_v3_with_auth.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("13469d0b-273b-494b-8098-47cc378dc4a6"),
+                            Id = new Guid("6062f179-6f7f-4460-9e0a-5b7b35e6097d"),
                             Name = "user"
                         },
                         new
                         {
-                            Id = new Guid("a55d2b23-0d70-499c-8db4-9f6fa7ecb2d4"),
+                            Id = new Guid("900ea8cc-958d-425f-9b5b-f89bdec3aff0"),
                             Name = "Manager"
                         },
                         new
                         {
-                            Id = new Guid("16817eb2-5b15-42b4-80f1-b276feb71e40"),
+                            Id = new Guid("398b3e1c-7726-42b6-8930-4ceeb8ca1346"),
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("1d57cbcd-0d83-4023-ae33-eb71cb3bf9df"),
+                            Id = new Guid("5791ee74-87aa-455c-bc3f-072f58fcacf5"),
                             Name = "Developer"
                         });
                 });

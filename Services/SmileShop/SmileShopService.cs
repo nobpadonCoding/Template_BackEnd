@@ -454,6 +454,13 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 					return ResponseResult.Failure<GetProductDto>($"Product id {deleteProductId} not found");
 				}
 
+				//check produck in Order
+				var productSales = await _dbContext.Orders.FirstOrDefaultAsync(x => x.Id == deleteProductId);
+				if (productSales is null)
+				{
+					return ResponseResult.Failure<GetProductDto>($"Product id {deleteProductId} have Order");
+				}
+
 				//mapper Dto and return
 				var product_return = _mapper.Map<GetProductDto>(product);
 
