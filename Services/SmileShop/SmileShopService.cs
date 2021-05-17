@@ -403,9 +403,11 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			}
 		}
 
-		public async Task<ServiceResponse<List<ProductGroup>>> GetProducGrouptFilter(ProductGroupFilterDto ProductGroupFilter)
+		public async Task<ServiceResponse<List<GetProductGroupDto>>> GetProducGrouptFilter(ProductGroupFilterDto ProductGroupFilter)
 		{
-			var productgroup_queryable = _dbContext.ProductGroups.AsQueryable();
+			var productgroup_queryable = _dbContext.ProductGroups
+											.Include(x => x.CreatedBy)
+											.AsQueryable();
 
 			//Filter
 			if (!string.IsNullOrWhiteSpace(ProductGroupFilter.ProductGroupName))
@@ -428,7 +430,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 				}
 				catch
 				{
-					return ResponseResultWithPagination.Failure<List<ProductGroup>>($"Could not order by field: {ProductGroupFilter.OrderingField}");
+					return ResponseResultWithPagination.Failure<List<GetProductGroupDto>>($"Could not order by field: {ProductGroupFilter.OrderingField}");
 				}
 			}
 
@@ -438,7 +440,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			var ProductGroupFilter_return = await productgroup_queryable.Paginate(ProductGroupFilter).ToListAsync();
 			_log.LogInformation($"ProducGrouptFilter Success");
 
-			return ResponseResultWithPagination.Success(ProductGroupFilter_return, paginationResult);
+			var ProductGroup_return = _mapper.Map<List<GetProductGroupDto>>(ProductGroupFilter_return);
+
+			return ResponseResultWithPagination.Success(ProductGroup_return, paginationResult);
 		}
 
 		public async Task<ServiceResponse<GetProductDto>> DeleteProduct(int deleteProductId)
