@@ -11,8 +11,7 @@ namespace NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop
 		public int StockCount { get; set; }
 		public DateTime CreatedDate { get; set; }
 		public UserDto CreatedBy { get; set; }
-		public string CreatedById { get; set; }
-		public string CreatedByUsername { get; set; }
+		// public string CreatedById { get; set; }
 		public Boolean Status { get; set; }
 	}
 }
