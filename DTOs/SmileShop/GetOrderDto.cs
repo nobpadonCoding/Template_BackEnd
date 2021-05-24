@@ -11,8 +11,9 @@ namespace NetCoreAPI_Template_v3_with_auth.DTOs.SmileShop
 		public double TotalAmount { get; set; }
 		public double Discount { get; set; }
 		public int ProductQuantity { get; set; }
+		public DateTime CreatedDate { get; set; }
 		public Guid CreatedById { get; set; }
 		public UserDto CreatedBy { get; set; }
-		public List<OrdersProductDetailDto> Orders {get;set;}
+		public List<OrdersProductDetailDto> Orders { get; set; }
 	}
 }

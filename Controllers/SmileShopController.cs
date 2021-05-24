@@ -125,10 +125,16 @@ namespace NetCoreAPI_Template_v3_with_auth.Controllers
 			return Ok(await _smileService.GetOrderFilter(OrderFilter));
 		}
 
-        [HttpGet("Order/{orderNumber}")]
+		[HttpGet("Order/{orderNumber}")]
 		public async Task<IActionResult> GetOrder(int orderNumber)
 		{
 			return Ok(await _smileService.GetOrder(orderNumber));
+		}
+
+		[HttpGet("Order")]
+		public async Task<IActionResult> GetOrder()
+		{
+			return Ok(await _smileService.GetOrder());
 		}
 
 	}

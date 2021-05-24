@@ -738,5 +738,27 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			return ResponseResultWithPagination.Success(OrderFilter_return, paginationResult);
 
 		}
+
+		public async Task<ServiceResponse<List<GetOrderDto>>> GetOrder()
+		{
+			try
+			{
+				var order = await _dbContext.OrderNo
+				.Include(x => x.Orders).ThenInclude(x => x.Product)
+				.Include(x => x.CreatedBy).ToListAsync();
+
+				//mapper Dto and return
+				var order_return = _mapper.Map<List<GetOrderDto>>(order);
+
+				_log.LogInformation("Get Order Success");
+				return ResponseResult.Success(order_return, "Success");
+			}
+			catch (Exception ex)
+			{
+
+				_log.LogError(ex.Message);
+				return ResponseResult.Failure<List<GetOrderDto>>(ex.Message);
+			}
+		}
 	}
 }
