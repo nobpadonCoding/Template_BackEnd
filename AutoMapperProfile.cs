@@ -20,9 +20,11 @@ namespace NetCoreAPI_Template_v3_with_auth
 				.ForMember(x => x.Name, x => x.MapFrom(x => x.RoleName));
 			CreateMap<UserRole, UserRoleDto>();
 			CreateMap<Product, GetProductDto>();
+			CreateMap<Product, ProductDto>();
 			CreateMap<Product, GetStockDto>();
 			CreateMap<Product, FilterProductNameDto>();
 			CreateMap<ProductGroup, GetProductGroupDto>();
+			CreateMap<ProductGroup, ProductGroupDto>();
 			CreateMap<ProductGroup, FilterProductGroupNameDto>();
 			CreateMap<Store, GetStockDto>();
 			CreateMap<Orders, GetOrderDto>();

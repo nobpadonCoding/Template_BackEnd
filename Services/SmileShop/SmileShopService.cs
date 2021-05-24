@@ -109,7 +109,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			}
 		}
 
-		public async Task<ServiceResponse<List<Product>>> GetProductFilter(ProductFilterDto ProductFilter)
+		public async Task<ServiceResponse<List<GetProductDto>>> GetProductFilter(ProductFilterDto ProductFilter)
 		{
 			var products_queryable = _dbContext.Products
 				.Include(x => x.ProductGroup)
@@ -136,7 +136,7 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 				}
 				catch
 				{
-					return ResponseResultWithPagination.Failure<List<Product>>($"Could not order by field: {ProductFilter.OrderingField}");
+					return ResponseResultWithPagination.Failure<List<GetProductDto>>($"Could not order by field: {ProductFilter.OrderingField}");
 				}
 			}
 
@@ -146,7 +146,9 @@ namespace NetCoreAPI_Template_v3_with_auth.Services.SmileShop
 			var ProductFilter_return = await products_queryable.Paginate(ProductFilter).ToListAsync();
 			_log.LogInformation($"Product Filter Success");
 
-			return ResponseResultWithPagination.Success(ProductFilter_return, paginationResult);
+			var OrderFilter_return = _mapper.Map<List<GetProductDto>>(ProductFilter_return);
+
+			return ResponseResultWithPagination.Success(OrderFilter_return, paginationResult);
 		}
 
 		public async Task<ServiceResponse<List<GetProductGroupDto>>> GetAllProductGroups()
